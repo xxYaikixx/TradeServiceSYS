@@ -1,19 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ChakraProvider, useDisclosure } from '@chakra-ui/react'
+import { Header } from './Header';
 
-function Example() {
+export const Example = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = React.useRef()
+    const loginflg = true
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
-
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <ChakraProvider>
+                <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} loginflg={loginflg} />
+            </ChakraProvider>
+        </>
     );
 }
 
