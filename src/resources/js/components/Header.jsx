@@ -2,8 +2,8 @@ import React from "react";
 import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer } from '@chakra-ui/react'
 import { AddIcon, HamburgerIcon, QuestionOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 
-// import { Link, Route, Routes } from "react-router-dom";
-// import { Login } from "./Login";
+import { Link, Route, Routes } from "react-router-dom";
+import { Login } from "./Login";
 
 export const Header = (props) => {
     const { btnRef, onOpen, isOpen, onClose, loginflg } = props;
@@ -65,7 +65,7 @@ export const Header = (props) => {
                     </MenuButton>
                     <MenuList>
                         ログアウト
-                        {/* {loginflg ? <Link to="/login">ログアウト</Link> : <Link to="/login">ログイン</Link>} */}
+                        {loginflg ? <Link to="/login">ログアウト</Link> : <Link to="/login">ログイン</Link>}
 
                     </MenuList>
                 </Menu>
