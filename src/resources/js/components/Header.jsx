@@ -64,9 +64,7 @@ export const Header = (props) => {
                         {loginflg && <Avatar bg='teal.500' />}
                     </MenuButton>
                     <MenuList>
-                        ログアウト
                         {loginflg ? <Link to="/login">ログアウト</Link> : <Link to="/login">ログイン</Link>}
-
                     </MenuList>
                 </Menu>
                 {/* <Routes>

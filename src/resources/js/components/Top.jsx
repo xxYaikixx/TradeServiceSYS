@@ -1,7 +1,7 @@
 import { Box, ChakraProvider, Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import React from 'react'
 import { Header } from './Header';
-// import { ItemInfo } from './ItemInfo';
+import { ItemInfo } from './ItemInfo';
 
 export const Top = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -24,7 +24,7 @@ export const Top = () => {
                         <Heading as='h3' size='lg' color='steelblue' > 新着 </Heading>
                     </Box>
                     <Flex gap='2' >
-                        {/* <ItemInfo imageSrc={props.imageSrc}
+                        <ItemInfo imageSrc={props.imageSrc}
                             itemName={props.itemName}
                             itemStatus={props.itemStatus}
                             changeItemName={props.changeItemName}
@@ -47,7 +47,7 @@ export const Top = () => {
                             itemStatus="カプセル未開封"
                             changeItemName="ラバーマグネット（ピクニックミッフィー）"
                             changeItemStatus="カプセル開封済み"
-                            shippingMethod="郵送" /> */}
+                            shippingMethod="郵送" />
                     </Flex>
                 </ChakraProvider>
             </div >
