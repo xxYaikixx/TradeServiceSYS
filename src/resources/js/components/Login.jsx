@@ -15,7 +15,7 @@ export const Login = () => {
     const handleIdChange = (e) => setId(e.target.value)
     const handlePasswordChange = (e) => setPassword(e.target.value)
     const login = (id, password) => {
-        (id === '' || password === '') ? setIsError(false) : window.location.href = "/top";
+        (id === '' || password === '') ? setIsError(false) : window.location.href = "/";
     }
 
     return (
