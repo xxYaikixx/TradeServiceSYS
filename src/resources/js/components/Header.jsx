@@ -19,7 +19,7 @@ export const Header = (props) => {
                             size='lg'
                             icon={<HamburgerIcon />}
                             bg='transparent'
-                        // _hover='transparent' _active='transparent'
+                            _hover='transparent' _active='transparent'
                         />
                         <Drawer
                             isOpen={isOpen}
@@ -67,10 +67,6 @@ export const Header = (props) => {
                         {loginflg ? <Link to="/login">ログアウト</Link> : <Link to="/login">ログイン</Link>}
                     </MenuList>
                 </Menu>
-                {/* <Routes>
-                    <Route path="/login" element={<Login />} />
-                </Routes> */}
-
             </Flex>
         </>
     );
