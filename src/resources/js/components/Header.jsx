@@ -19,7 +19,7 @@ export const Header = (props) => {
                             size='lg'
                             icon={<HamburgerIcon />}
                             bg='transparent'
-                            _hover='transparent' _active='transparent'
+                        // _hover='transparent' _active='transparent'
                         />
                         <Drawer
                             isOpen={isOpen}
@@ -57,7 +57,10 @@ export const Header = (props) => {
                     </>
                 }
                 <Menu>
-                    <MenuButton as={Button} bg='transparent' _hover='transparent' _active='transparent'>
+                    <MenuButton as={Button} bg='transparent'
+                        _hover='transparent'
+                        _active='transparent'
+                    >
                         {loginflg && <Avatar bg='teal.500' />}
                     </MenuButton>
                     <MenuList>

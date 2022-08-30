@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { ChakraProvider, useDisclosure } from '@chakra-ui/react'
 import { Header } from './Header';
 
@@ -18,6 +17,8 @@ export const Example = () => {
 
 export default Example;
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<Example />, document.getElementById('app'));
-}
+// After
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<Example />);
