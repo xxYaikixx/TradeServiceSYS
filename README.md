@@ -19,7 +19,7 @@ $ make install-recommend-packages # オプション
 $ docker compose exec app php artisan migrate:fresh --seed
 ```
 
-4. 以下にアクセスしてLaravelの画面が出たら成功
+4. 以下にアクセスしてLaravelの画面が出たら成功<br>
 http://localhost
 
 ### 補足：DBのクライアント利用の場合
