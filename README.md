@@ -77,6 +77,36 @@ Route::get('{any}', function () {
 $ npm run dev
 ```
 
+### Chakra UI の導入
+
+１. ChakraUIのインストールをする
+```bash
+$ npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+$ yarn add @chakra-ui/react @emotion/react @emotion/styled framer-motion
+```
+
+２.Chakra UIを以下の形式に従って使用
+
+```
+import * as React from 'react'
+
+// 1. import `ChakraProvider` component
+import { ChakraProvider } from '@chakra-ui/react'
+
+function App() {
+  // 2. Wrap ChakraProvider at the root of your app
+  return (
+    <ChakraProvider>
+      <TheRestOfYourApplication />
+    </ChakraProvider>
+  )
+}
+```
+３. ビルドする
+```bash
+$ npm run dev
+```
+
 ## コンテナの構成
 
 ```bash
