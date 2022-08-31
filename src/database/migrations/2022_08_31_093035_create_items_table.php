@@ -12,15 +12,13 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->char('zipcode', 7);
-            $table->string('address');
-            $table->rememberToken();
+            $table->char('status')->comment('0:カプセル未開封 1:カプセルのみ開封済み 2:カプセルおよび内包装開封済み（新品同様） 3:開封済中古品');
+            $table->string('image')->nullable();
+            $table->string('user_id')->references('id')->on('users');
+            $table->longText('comment')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('items');
     }
 };
