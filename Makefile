@@ -68,6 +68,10 @@ app:
 	docker compose exec app bash
 migrate:
 	docker compose exec app php artisan migrate
+migrate-rollback:
+	docker compose exec app php artisan migrate:rollback
+migrate-status:
+	docker compose exec app php artisan migrate:status
 fresh:
 	docker compose exec app php artisan migrate:fresh --seed
 seed:
