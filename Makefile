@@ -8,7 +8,7 @@ create-project:
 	mkdir -p src
 	@make build
 	@make up
-	@make laravel-install
+	# @make laravel-install
 	docker compose exec app php artisan key:generate
 	docker compose exec app php artisan storage:link
 	docker compose exec app chmod -R 777 storage bootstrap/cache
@@ -68,6 +68,10 @@ app:
 	docker compose exec app bash
 migrate:
 	docker compose exec app php artisan migrate
+migrate-rollback:
+	docker compose exec app php artisan migrate:rollback
+migrate-status:
+	docker compose exec app php artisan migrate:status
 fresh:
 	docker compose exec app php artisan migrate:fresh --seed
 seed:
