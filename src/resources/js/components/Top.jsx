@@ -1,7 +1,8 @@
 import { Box, ChakraProvider, Flex, Heading, useDisclosure } from '@chakra-ui/react';
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Header } from './Header';
 import { ItemInfo } from './ItemInfo';
+import axios from 'axios';
 
 export const Top = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -15,6 +16,24 @@ export const Top = () => {
         itemStatus: 'カプセル未開封'
     }
     const loginflg = true
+
+    //postsの状態を管理する
+    const [items, setItems] = useState([]);
+    useEffect(() => {
+        getItemsData();
+    }, [])
+    //バックエンドからpostsの一覧を取得する処理
+    const getItemsData = () => {
+        axios
+            .get('/api/items')
+            .then(response => {
+                setItems(response.data);     //バックエンドから返ってきたデータでpostsを更新する
+                console.log(response.data);　//取得データ確認用のconsole.log()
+            })
+            .catch(() => {
+                console.log('通信に失敗しました');
+            });
+    }
     return (
         <>
             <div >
