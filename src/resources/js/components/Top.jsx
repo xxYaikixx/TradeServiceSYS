@@ -7,14 +7,6 @@ import axios from 'axios';
 export const Top = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-    const props = {
-        imageSrc: 'https://via.placeholder.com/300x300.png/09f/fff',
-        itemName: '雪の日のボリス',
-        changeItemName: 'ミッフィー（黄）',
-        changeItemStatus: '未開封希望（カプセル除く）',
-        shippingMethod: '郵送',
-        itemStatus: 'カプセル未開封'
-    }
     const loginflg = true
 
     //postsの状態を管理する
@@ -34,6 +26,20 @@ export const Top = () => {
                 console.log('通信に失敗しました');
             });
     }
+
+    let contents = [];
+    items.map((item) =>
+        contents.push({
+            name: item.name,
+            status: item.status,
+            comment: item.comment,
+            image: "https://via.placeholder.com/300",
+
+            // user_id,
+            // editBtn: <Button color="secondary" variant="contained">編集</Button>,
+            // deleteBtn: <Button color="primary" variant="contained">完了</Button>,
+        })
+    );
     return (
         <>
             <div >
@@ -43,30 +49,16 @@ export const Top = () => {
                         <Heading as='h3' size='lg' color='steelblue' > 新着 </Heading>
                     </Box>
                     <Flex gap='2' >
-                        <ItemInfo imageSrc={props.imageSrc}
-                            itemName={props.itemName}
-                            itemStatus={props.itemStatus}
-                            changeItemName={props.changeItemName}
-                            changeItemStatus={props.changeItemStatus}
-                            shippingMethod={props.shippingMethod} />
-                        <ItemInfo imageSrc={props.imageSrc}
-                            itemName="メラニー"
-                            itemStatus="開封済み"
-                            changeItemName="ミッフィーのお父さん"
-                            changeItemStatus="開封済み"
-                            shippingMethod="手渡し（都内限定）" />
-                        <ItemInfo imageSrc={props.imageSrc}
-                            itemName="ミッフィー（ボーダー）"
-                            itemStatus="カプセル開封済み"
-                            changeItemName="グランティ"
-                            changeItemStatus="カプセル開封済み"
-                            shippingMethod="匿名郵便" />
-                        <ItemInfo imageSrc={props.imageSrc}
-                            itemName="ラバーマグネット（おうち）"
-                            itemStatus="カプセル未開封"
-                            changeItemName="ラバーマグネット（ピクニックミッフィー）"
-                            changeItemStatus="カプセル開封済み"
-                            shippingMethod="郵送" />
+                        {contents.map((content, index) => (
+                            <ItemInfo key={index}
+                                imageSrc={content.image}
+                                itemName={content.name}
+                                itemStatus={content.status}
+                                changeItemName="aaa"
+                                changeItemStatus="1"
+                                shippingMethod="2"
+                                itemComment={content.comment} />
+                        ))}
                     </Flex>
                 </ChakraProvider>
             </div >
