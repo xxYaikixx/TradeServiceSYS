@@ -55,13 +55,14 @@ export const Login = () => {
                         <Stack spacing={3}>
                             <form onSubmit={loginSubmit}>
                                 <FormLabel>ログインID（メールアドレス）</FormLabel>
-                                <Input type='email'
+                                <Input type='email' name="email"
                                     onChange={handleInput} value={loginInput.email} />
-                                <span>{loginInput.error_list.password}</span>
+                                <span>{loginInput.error_list.email}</span>
                                 <FormLabel>パスワード</FormLabel>
-                                <Input type='password'
+                                <Input type='password' name="password"
                                     onChange={handleInput} value={loginInput.password} />
                                 <span>{loginInput.error_list.password}</span>
+                                <br /><br />
                                 <Button colorScheme='blue' type="submit">ログイン</Button>
                             </form>
                         </Stack>
