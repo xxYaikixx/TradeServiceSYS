@@ -2,16 +2,35 @@ import React from "react";
 import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer } from '@chakra-ui/react'
 import { AddIcon, HamburgerIcon, QuestionOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 
-import { Link, Route, Routes } from "react-router-dom";
-import { Login } from "./Login";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import swal from 'sweetalert';
+// import { Login } from "./Login";
 
 export const Header = (props) => {
-    const { btnRef, onOpen, isOpen, onClose, loginflg } = props;
+    const navigate = useNavigate();
+
+    const logoutSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post(`/api/logout`).then(res => {
+            if (res.data.status === 200) {
+                localStorage.removeItem('auth_token', res.data.token);
+                localStorage.removeItem('auth_name', res.data.username);
+                swal("ログアウトしました", res.data.message, "success");
+                navigate('/');
+                location.reload();
+            }
+        });
+    }
+
+    const { btnRef, onOpen, isOpen, onClose } = props;
+
     return (
         <>
             <Flex minWidth='max-content' alignItems='center' gap='2' py={1} bg='#a3d1ff' color='gray.600'>
                 {
-                    loginflg &&
+                    localStorage.getItem('auth_token') &&
                     <>
                         <IconButton
                             ref={btnRef} onClick={onOpen}
@@ -61,10 +80,10 @@ export const Header = (props) => {
                         _hover='transparent'
                         _active='transparent'
                     >
-                        {loginflg && <Avatar bg='teal.500' />}
+                        {localStorage.getItem('auth_token') && <Avatar bg='teal.500' />}
                     </MenuButton>
-                    <MenuList>
-                        {loginflg ? <Link to="/login">ログアウト</Link> : <Link to="/login">ログイン</Link>}
+                    <MenuList onClick={logoutSubmit}>
+                        {localStorage.getItem('auth_token') ? <Link to="/login">ログアウト</Link> : <Link to="/login">ログイン</Link>}
                     </MenuList>
                 </Menu>
             </Flex>
