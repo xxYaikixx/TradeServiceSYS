@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { Header } from './components/Header';
 import { Top } from "./components/Top";
 import { Login } from "./components/Login";
+import { NewItem } from "./components/NewItem";
 import { createRoot } from 'react-dom/client';
 
 export const Example = () => {
@@ -18,6 +19,7 @@ export const Example = () => {
                         <Routes>
                             <Route path="/" element={<Top />} />
                             <Route path="/login" element={<Login />} />;
+                            <Route path="/new" element={<NewItem />} />;
                         </Routes>
                     </>
                 </BrowserRouter>

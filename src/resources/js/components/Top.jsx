@@ -34,8 +34,7 @@ export const Top = () => {
             status: item.status,
             comment: item.comment,
             image: "https://via.placeholder.com/300",
-
-            // user_id,
+            user_id: item.user_id,
             // editBtn: <Button color="secondary" variant="contained">編集</Button>,
             // deleteBtn: <Button color="primary" variant="contained">完了</Button>,
         })
@@ -54,6 +53,7 @@ export const Top = () => {
                                 imageSrc={content.image}
                                 itemName={content.name}
                                 itemStatus={content.status}
+                                itemAuthor={content.user_id}
                                 changeItemName="aaa"
                                 changeItemStatus="1"
                                 shippingMethod="2"

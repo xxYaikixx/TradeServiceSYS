@@ -35,7 +35,7 @@ export const Header = (props) => {
                                 <DrawerBody>
                                     <Button w='100%' bg='transparent'>
                                         <AddIcon pr={2} />
-                                        新規作成
+                                        <Link to="/new">新規作成</Link>
                                     </Button>
                                     <Button w='100%' bg='transparent'>
                                         <QuestionOutlineIcon pr={2} />
@@ -51,7 +51,7 @@ export const Header = (props) => {
                             </DrawerContent>
                         </Drawer>
                         <Box p='2'>
-                            <Heading size='md'>ガチャガチャ景品マッチングサービス</Heading>
+                            <Link to="/"><Heading size='md'>ガチャガチャ景品マッチングサービス</Heading></Link>
                         </Box>
                         <Spacer />
                     </>

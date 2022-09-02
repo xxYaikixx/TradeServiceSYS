@@ -3,7 +3,7 @@ import { Badge, Box, Button, Container, Image } from '@chakra-ui/react'
 import { ModalWindow } from './ModalWindow';
 
 export const ItemInfo = (props) => {
-    const { imageSrc, itemName, itemStatus, changeItemName, changeItemStatus, shippingMethod, itemComment } = props;
+    const { imageSrc, itemName, itemStatus, changeItemName, changeItemStatus, shippingMethod, itemComment, itemAuthor } = props;
     return (
         <>
             <Container maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'  >
@@ -37,7 +37,7 @@ export const ItemInfo = (props) => {
                             <Container>
                                 配送方法:{shippingMethod}
                             </Container>
-                            <ModalWindow imageSrc={imageSrc} itemComment={itemComment} />
+                            <ModalWindow imageSrc={imageSrc} itemComment={itemComment} itemAuthor={itemAuthor} />
                         </Box>
                     </Box>
                 </Box>
