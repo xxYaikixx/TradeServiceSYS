@@ -1,16 +1,24 @@
 import React from 'react';
-import { ChakraProvider, useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { Header } from './components/Header';
 import { Top } from "./components/Top";
 import { Login } from "./components/Login";
 import { NewItem } from "./components/NewItem";
 import { createRoot } from 'react-dom/client';
 
+import axios from 'axios';
+
+axios.defaults.baseURL = "http://localhost/";
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Accept'] = 'application/json';
+axios.defaults.withCredentials = true;
+axios.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('auth_token');
+    config.headers.Authorization = token ? `Bearer ${token}` : '';
+    return config;
+});
+
 export const Example = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
-    const loginflg = true
     return (
         <>
             <React.StrictMode>

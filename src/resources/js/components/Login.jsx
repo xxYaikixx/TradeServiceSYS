@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Spacer, Stack, TagLabel, Text, useDisclosure } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import axios from 'axios';
+import swal from "sweetalert";
 
 export const Login = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -57,11 +58,11 @@ export const Login = () => {
                                 <FormLabel>ログインID（メールアドレス）</FormLabel>
                                 <Input type='email' name="email"
                                     onChange={handleInput} value={loginInput.email} />
-                                <span>{loginInput.error_list.email}</span>
+                                <span><Text fontSize='sm' color='red'>{loginInput.error_list.email}</Text></span>
                                 <FormLabel>パスワード</FormLabel>
                                 <Input type='password' name="password"
                                     onChange={handleInput} value={loginInput.password} />
-                                <span>{loginInput.error_list.password}</span>
+                                <span><Text fontSize='sm' color='red'>{loginInput.error_list.password}</Text></span>
                                 <br /><br />
                                 <Button colorScheme='blue' type="submit">ログイン</Button>
                             </form>

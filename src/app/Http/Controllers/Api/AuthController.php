@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 class AuthController extends Controller
@@ -72,6 +73,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+        Log::info('LogoutController');
         auth()->user()->tokens()->delete();
         return response()->json([
             'status'=>200,
