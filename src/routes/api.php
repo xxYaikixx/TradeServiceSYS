@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Log;
 */
 
 Route::group(['middleware' => 'api'], function () {
-    Route::get('items', 'App\Http\Controllers\Api\ItemController@index');
+    Route::get('posts', 'App\Http\Controllers\Api\ItemController@index');
+    Route::post('posts/create', 'App\Http\Controllers\Api\ItemController@create');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -28,6 +29,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Log::info('api.php!!!');
     Route::post('logout', [AuthController::class, 'logout']);
 });
