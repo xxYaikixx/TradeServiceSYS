@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
 
@@ -9,6 +9,7 @@ export const NewItem = () => {
     const loginflg = true
     const btnRef = React.useRef()
     const [posts, setPosts] = useState([]);
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         itemName: '',
@@ -29,7 +30,7 @@ export const NewItem = () => {
                 itemTargetName: formData.itemTargetName,
                 itemTargetStatus: formData.itemTargetStatus,
             })
-            .then(response => {
+            .then((response) => {
                 const tempPosts = posts
                 tempPosts.push(response.data);
                 setPosts(tempPosts)
@@ -40,11 +41,15 @@ export const NewItem = () => {
                     itemTargetName: '',
                     itemTargetStatus: '0',
                 });
-            })
+                navigate("/");
+            }
+            )
             .catch(error => {
-                console.log(error);
                 console.log('通信に失敗しました');
             });
+
+
+
     }
 
     const inputChange = (key, value) => {
