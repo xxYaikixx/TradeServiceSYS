@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge, Box, Button, Container, Image, WrapItem } from '@chakra-ui/react'
 import { ModalWindow } from './ModalWindow';
+import { STATUS } from '../config';
 
 export const ItemInfo = (props) => {
     const { imageSrc, itemName, itemStatus, changeItemName, changeItemStatus, shippingMethod, itemComment, itemAuthor } = props;
@@ -27,7 +28,7 @@ export const ItemInfo = (props) => {
                                     商品名:{itemName}
                                 </Container>
                                 <Container>
-                                    状態:{itemStatus}
+                                    状態:{STATUS[itemStatus]}
                                 </Container>
                                 <Container>
                                     交換対象:{changeItemName}
