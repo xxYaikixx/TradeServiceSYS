@@ -9,7 +9,6 @@ import swal from "sweetalert";
 export const Login = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-    const loginflg = false
 
     const navigate = useNavigate();
     const [loginInput, setLogin] = useState({
@@ -53,7 +52,7 @@ export const Login = () => {
     return (
         <>
             <ChakraProvider>
-                <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} loginflg={loginflg} />
+                <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
                 <Box my={10}>
                     <Container maxW='xl' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={3}>
