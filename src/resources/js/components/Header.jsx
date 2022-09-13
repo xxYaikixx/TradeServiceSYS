@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer } from '@chakra-ui/react'
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, Text } from '@chakra-ui/react'
 import { AddIcon, HamburgerIcon, QuestionOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -73,10 +73,8 @@ export const Header = (props) => {
                     <Flex minWidth='max-content' alignItems='center' gap='2' py={1} bg='#a3d1ff' color='gray.600'>
                         {AuthElements}
                         <Menu>
-                            <MenuButton as={Button} bg='transparent'
-                                _hover='transparent'
-                                _active='transparent'
-                            >
+                            <Text>こんにちは。{localStorage.auth_nickname}さん</Text>
+                            <MenuButton as={Button} bg='transparent' _hover='transparent' _active='transparent'>
                                 <Avatar bg='teal.500' />
                             </MenuButton>
                             <MenuList>
@@ -109,10 +107,6 @@ export const Header = (props) => {
                         <DrawerCloseButton />
                         <DrawerHeader color='gray.700'>Menu</DrawerHeader>
                         <DrawerBody>
-                            <Button w='100%' bg='transparent'>
-                                <AddIcon pr={2} />
-                                <Link to="/new">新規作成</Link>
-                            </Button>
                             <Button w='100%' bg='transparent'>
                                 <QuestionOutlineIcon pr={2} />
                                 使用ガイド

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ItemController extends Controller
@@ -23,7 +24,7 @@ class ItemController extends Controller
         $item->status = $request->itemStatus;
         $item->comment = $request->comment;
         $item->image = 'image/picture.png';
-        $item->user_id = '1';
+        $item->user_id =  $request->user_id;
         $item->save();
         return response()->json($item, 200);
     }

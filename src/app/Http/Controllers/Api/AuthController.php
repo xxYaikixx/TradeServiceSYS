@@ -34,7 +34,9 @@ class AuthController extends Controller
 
                 return response()->json([
                     'status'=>200,
+                    'id'=>$user->id,
                     'username'=>$user->name,
+                    'nickname'=>$user->nickname,
                     'token'=>$token,
                     'message'=>'ログインに成功しました。'
                 ]);

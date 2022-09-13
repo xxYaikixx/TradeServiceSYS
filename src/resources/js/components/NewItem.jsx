@@ -6,7 +6,6 @@ import { Header } from './Header';
 
 export const NewItem = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const loginflg = true
     const btnRef = React.useRef()
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
@@ -17,6 +16,7 @@ export const NewItem = () => {
         comment: '',
         itemTargetName: '',
         itemTargetStatus: '0',
+        shippingMethod: '0',
     });
     const createPost = async () => {
         if (formData == '') {
@@ -27,8 +27,10 @@ export const NewItem = () => {
                 itemName: formData.itemName,
                 itemStatus: formData.itemStatus,
                 comment: formData.comment,
+                user_id: localStorage.auth_id,
                 itemTargetName: formData.itemTargetName,
                 itemTargetStatus: formData.itemTargetStatus,
+                shippingMethod: formData.shippingMethod,
             })
             .then((response) => {
                 const tempPosts = posts
@@ -38,8 +40,10 @@ export const NewItem = () => {
                     itemName: '',
                     itemStatus: '0',
                     comment: '',
+                    user_id: localStorage.auth_id,
                     itemTargetName: '',
                     itemTargetStatus: '0',
+                    shippingMethod: '0',
                 });
                 navigate("/");
             }
@@ -60,13 +64,13 @@ export const NewItem = () => {
     return (
         <>
             <ChakraProvider>
-                <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} loginflg={loginflg} />
+                <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
                 <Box my={5} >
 
                     <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={5}>
 
-                            <FormLabel>アイテム名</FormLabel>
+                            <FormLabel>アイテム名 </FormLabel>
                             <Input type='text'
                                 value={formData.itemName} name="itemName" onChange={(e) => inputChange("itemName", e.target.value)} />
                             <FormLabel>ステータス</FormLabel>
@@ -93,6 +97,16 @@ export const NewItem = () => {
                                     <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
                                     <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
                                     <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
+                                </Stack>
+                            </RadioGroup>
+                            <FormLabel>郵送方法</FormLabel>
+                            <RadioGroup onChange={(v) => inputChange("shippingMethod", v)} value={formData.shippingMethod} name="shippingMethod">
+                                <Stack direction='row'>
+                                    <Radio value='0'><Text fontSize='sm'>手渡し</Text></Radio>
+                                    <Radio value='1'><Text fontSize='sm'>郵便（記名）</Text></Radio>
+                                    <Radio value='2'><Text fontSize='sm'>郵便（匿名）</Text></Radio>
+                                    <Radio value='3'><Text fontSize='sm'>宅配（記名）</Text></Radio>
+                                    <Radio value='4'><Text fontSize='sm'>宅配（匿名）</Text></Radio>
                                 </Stack>
                             </RadioGroup>
                             <Button colorScheme='blue' onClick={createPost}>確認</Button>

@@ -20,6 +20,7 @@ export const Top = () => {
             .get('/api/posts')
             .then(response => {
                 setItems(response.data);     //バックエンドから返ってきたデータでpostsを更新する
+                console.log(localStorage);
             })
             .catch(() => {
                 console.log('通信に失敗しました');

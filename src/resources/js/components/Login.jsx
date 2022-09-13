@@ -35,9 +35,12 @@ export const Login = () => {
                 if (res.data.status === 200) {
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.username);
+                    localStorage.setItem('auth_id', res.data.id);
+                    localStorage.setItem('auth_nickname', res.data.nickname);
                     swal("ログイン成功", res.data.message, "success");
                     navigate('/');
                     location.reload();
+
                 } else if (res.data.status === 401) {
                     swal("注意", res.data.message, "warning");
                 } else {
