@@ -28,7 +28,6 @@ export const Top = () => {
     }
 
     let contents = [];
-    console.log(items);
     items.map((item) =>
         contents.push({
             name: item.name,
@@ -43,7 +42,6 @@ export const Top = () => {
             // deleteBtn: <Button color="primary" variant="contained">完了</Button>,
         })
     );
-    console.log(contents);
     return (
         <>
             <div >

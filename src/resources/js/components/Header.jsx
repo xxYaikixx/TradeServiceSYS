@@ -5,7 +5,6 @@ import { AddIcon, HamburgerIcon, QuestionOutlineIcon, SearchIcon } from "@chakra
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import swal from 'sweetalert';
-// import { Login } from "./Login";
 
 export const Header = (props) => {
     const navigate = useNavigate();
