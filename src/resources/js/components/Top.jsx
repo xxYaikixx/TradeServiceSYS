@@ -28,22 +28,27 @@ export const Top = () => {
     }
 
     let contents = [];
+    console.log(items);
     items.map((item) =>
         contents.push({
             name: item.name,
             status: item.status,
             comment: item.comment,
-            image: "https://via.placeholder.com/300",
-            user_id: item.user_id,
+            image: item.image,
+            userId: item.user_id,
+            changeItemName: item.change_item_name,
+            changeItemStatus: item.change_item_status,
+            shippingMethod: item.shipping_method,
             // editBtn: <Button color="secondary" variant="contained">編集</Button>,
             // deleteBtn: <Button color="primary" variant="contained">完了</Button>,
         })
     );
+    console.log(contents);
     return (
         <>
             <div >
                 <ChakraProvider>
-                    <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} loginflg={loginflg} />
+                    <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
                     <Box bg='white' w='100%' p={4} color='gray.900' >
                         <Heading as='h3' size='lg' color='steelblue' > 新着 </Heading>
                     </Box>
@@ -53,10 +58,10 @@ export const Top = () => {
                                 imageSrc={content.image}
                                 itemName={content.name}
                                 itemStatus={content.status}
-                                itemAuthor={content.user_id}
-                                changeItemName="aaa"
-                                changeItemStatus="1"
-                                shippingMethod="2"
+                                itemAuthor={content.userId}
+                                changeItemName={content.changeItemName}
+                                changeItemStatus={content.changeItemStatus}
+                                shippingMethod={content.shippingMethod}
                                 itemComment={content.comment} />
                         ))}
                     </Wrap>
