@@ -7,7 +7,6 @@ import axios from 'axios';
 export const Top = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-    const loginflg = true
 
     //postsの状態を管理する
     const [items, setItems] = useState([]);
@@ -20,7 +19,6 @@ export const Top = () => {
             .get('/api/posts')
             .then(response => {
                 setItems(response.data);     //バックエンドから返ってきたデータでpostsを更新する
-                console.log(localStorage);
             })
             .catch(() => {
                 console.log('通信に失敗しました');
@@ -39,8 +37,6 @@ export const Top = () => {
             changeItemStatus: item.change_item_status,
             shippingMethod: item.shipping_method,
             nickname: item.nickname,
-            // editBtn: <Button color="secondary" variant="contained">編集</Button>,
-            // deleteBtn: <Button color="primary" variant="contained">完了</Button>,
         })
     );
     return (

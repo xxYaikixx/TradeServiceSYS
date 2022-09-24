@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Box, Button, Container, Image, WrapItem } from '@chakra-ui/react'
+import { Badge, Box, Container, Image, WrapItem } from '@chakra-ui/react'
 import { ModalWindow } from './ModalWindow';
 import { STATUS } from '../config';
 import { SHIPPING_METHOD } from '../config';
