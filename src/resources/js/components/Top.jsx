@@ -38,6 +38,7 @@ export const Top = () => {
             changeItemName: item.change_item_name,
             changeItemStatus: item.change_item_status,
             shippingMethod: item.shipping_method,
+            nickname: item.nickname,
             // editBtn: <Button color="secondary" variant="contained">編集</Button>,
             // deleteBtn: <Button color="primary" variant="contained">完了</Button>,
         })
@@ -60,7 +61,8 @@ export const Top = () => {
                                 changeItemName={content.changeItemName}
                                 changeItemStatus={content.changeItemStatus}
                                 shippingMethod={content.shippingMethod}
-                                itemComment={content.comment} />
+                                itemComment={content.comment}
+                                nickname={content.nickname} />
                         ))}
                     </Wrap>
                 </ChakraProvider>

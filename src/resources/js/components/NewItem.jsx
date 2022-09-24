@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
@@ -9,10 +9,18 @@ export const NewItem = () => {
     const btnRef = React.useRef()
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
+    const inputRef = useRef < HTMLInputElement > (null);
+    const onChange = (event) => {
+        const { files } = event.target;
+        setValue('preview_url', URL.createObjectURL(files[0])); // 動いた!!
+    };
+
+    // const { name: previewUrl } = register('preview_url');
 
     const [formData, setFormData] = useState({
         itemName: '',
         itemStatus: '0',
+        // image: '',
         comment: '',
         itemTargetName: '',
         itemTargetStatus: '0',
@@ -26,6 +34,7 @@ export const NewItem = () => {
             .post('/api/posts/create', {
                 itemName: formData.itemName,
                 itemStatus: formData.itemStatus,
+                image: formData.image,
                 comment: formData.comment,
                 user_id: localStorage.auth_id,
                 itemTargetName: formData.itemTargetName,
@@ -39,6 +48,7 @@ export const NewItem = () => {
                 setFormData({
                     itemName: '',
                     itemStatus: '0',
+                    // image: '',
                     comment: '',
                     user_id: localStorage.auth_id,
                     itemTargetName: '',
@@ -57,9 +67,7 @@ export const NewItem = () => {
     }
 
     const inputChange = (key, value) => {
-        formData[key] = value;
-        let data = Object.assign({}, formData);
-        setFormData(data);
+        setFormData((prev) => ({ ...formData, [key]: value }));
     }
     return (
         <>
@@ -83,7 +91,17 @@ export const NewItem = () => {
                                 </Stack>
                             </RadioGroup>
                             <FormLabel>画像</FormLabel>
-                            <input type="file" accept="image/*" multiple name="image" />
+                            {/* <Input
+                                id={previewUrl}
+                                ref={inputRef}
+                                name={previewUrl}
+                                type="file"
+                                accept="image/*"
+                                onChange={onFileInputChange}
+                            /> */}
+                            {/* <Input type="file" onChange={(e) => {
+                                inputChange("image", e.target.files[0]);
+                            }} accept="image/*" multiple ref={inputRef} name="image" /> */}
                             <FormLabel>コメント・補足</FormLabel>
                             <Textarea type='text'
                                 onChange={(e) => inputChange("comment", e.target.value)} value={formData.comment} name="comment" />

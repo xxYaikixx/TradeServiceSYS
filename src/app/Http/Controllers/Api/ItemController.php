@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -14,11 +15,15 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
+        for ($n = 0; $n<count($items); $n++) {
+            $items[$n]['nickname']=DB::table('users')->find($items[$n]->user_id)->nickname;
+        }
         return response()->json($items, 200);
     }
     // itemの一覧を表示する
     public function create(Request $request)
     {
+        // $path = $request->file('image')->store('images');
         $item = new Item;
         $item->name = $request->itemName;
         $item->status = $request->itemStatus;

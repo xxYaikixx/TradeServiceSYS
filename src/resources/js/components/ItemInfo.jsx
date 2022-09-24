@@ -5,7 +5,7 @@ import { STATUS } from '../config';
 import { SHIPPING_METHOD } from '../config';
 
 export const ItemInfo = (props) => {
-    const { imageSrc, itemName, itemStatus, changeItemName, changeItemStatus, shippingMethod, itemComment, itemAuthor } = props;
+    const { imageSrc, itemName, itemStatus, changeItemName, changeItemStatus, shippingMethod, itemComment, itemAuthor, nickname } = props;
     return (
         <>
             <WrapItem>
@@ -40,7 +40,7 @@ export const ItemInfo = (props) => {
                                 <Container>
                                     配送方法:{SHIPPING_METHOD[shippingMethod]}
                                 </Container>
-                                <ModalWindow imageSrc={imageSrc} itemComment={itemComment} itemAuthor={itemAuthor} />
+                                <ModalWindow imageSrc={imageSrc} itemComment={itemComment} itemAuthor={itemAuthor} nickname={nicknamep} />
                             </Box>
                         </Box>
                     </Box>
