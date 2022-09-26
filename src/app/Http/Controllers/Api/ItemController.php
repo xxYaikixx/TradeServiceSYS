@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 use Illuminate\Support\Facades\Log;
 
 class ItemController extends Controller
@@ -23,23 +24,34 @@ class ItemController extends Controller
     // itemの一覧を表示する
     public function create(Request $request)
     {
-        // $path = $request->file('image')->store('images');
-        $item = new Item;
-        $item->name = $request->itemName;
-        $item->status = $request->itemStatus;
-        $item->comment = $request->comment;
-        // $item->image = $request->file('image')->getClientOriginalName();
-        $item->user_id =  $request->user_id;
-        $item->change_item_name = $request->itemTargetName;
-        $item->change_item_status = $request->itemTargetStatus;
-        $item->shipping_method = $request->shippingMethod;
-        $item->save();
-        // 画像の保存
-        // $request->file('image')->storeAs('public/' . $dir, $file_name);
-        // $image = new Image();
-        // $image->name = $file_name;
-        // $image->path = 'storage/' . $dir . '/' . $file_name;
-        // $image->save();
-        return response()->json($item, 200);
+        $validator = Validator::make($request->all(), [
+            'itemName' => 'required',
+        ]);
+
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors'=>$validator->messages(),
+            ], 400);
+        } else {
+            // $path = $request->file('image')->store('images');
+            $item = new Item;
+            $item->name = $request->itemName;
+            $item->status = $request->itemStatus;
+            $item->comment = $request->comment;
+            // $item->image = $request->file('image')->getClientOriginalName();
+            $item->user_id =  $request->user_id;
+            $item->change_item_name = $request->itemTargetName;
+            $item->change_item_status = $request->itemTargetStatus;
+            $item->shipping_method = $request->shippingMethod;
+            $item->save();
+            // 画像の保存
+            // $request->file('image')->storeAs('public/' . $dir, $file_name);
+            // $image = new Image();
+            // $image->name = $file_name;
+            // $image->path = 'storage/' . $dir . '/' . $file_name;
+            // $image->save();
+            return response()->json($item, 200);
+        }
     }
 }

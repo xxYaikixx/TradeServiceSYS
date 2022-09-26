@@ -171,6 +171,7 @@ return [
     'attributes' => [
         'email'=>'メールアドレス',
         'password'=>'パスワード',
+        'itemName'=>'アイテム名',
     ],
 
 ];

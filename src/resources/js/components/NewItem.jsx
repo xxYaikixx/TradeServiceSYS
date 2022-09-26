@@ -10,11 +10,6 @@ export const NewItem = () => {
     const btnRef = React.useRef()
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
-    const inputRef = useRef < HTMLInputElement > (null);
-    const onChange = (event) => {
-        const { files } = event.target;
-        setValue('preview_url', URL.createObjectURL(files[0])); // 動いた!!
-    };
 
     // const { name: previewUrl } = register('preview_url');
 
@@ -28,7 +23,10 @@ export const NewItem = () => {
         shippingMethod: '0',
         error_list: [],
     });
-
+    const handleInput = (e) => {
+        e.persist();
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
 
     const createPost = (e) => {
         e.preventDefault();
@@ -44,26 +42,28 @@ export const NewItem = () => {
         }
         axios.post('/api/posts/create', data)
             .then(res => {
-                if (res.status === 200) {
-                    const tempPosts = posts
-                    tempPosts.push(res.data);
-                    setPosts(tempPosts)
-                    setFormData({
-                        itemName: '',
-                        itemStatus: '0',
-                        // image: '',
-                        comment: '',
-                        user_id: localStorage.auth_id,
-                        itemTargetName: '',
-                        itemTargetStatus: '0',
-                        shippingMethod: '0',
-                    });
-                    navigate("/");
-                }
+                const tempPosts = posts;
+                tempPosts.push(res.data);
+                setPosts(tempPosts);
+                setFormData({
+                    itemName: '',
+                    itemStatus: '0',
+                    // image: '',
+                    comment: '',
+                    user_id: localStorage.auth_id,
+                    itemTargetName: '',
+                    itemTargetStatus: '0',
+                    shippingMethod: '0',
+                });
+                navigate("/");
             }
             )
             .catch(error => {
                 console.log(error);
+                if (error.response.status === 400) {
+                    console.log('ELSE');
+                    setFormData({ ...formData, error_list: error.response.data.validation_errors });
+                }
                 console.log('通信に失敗しました');
             });
 
@@ -83,8 +83,7 @@ export const NewItem = () => {
                     <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={5}>
                             <FormLabel>アイテム名 </FormLabel>
-                            <Input type='text'
-                                value={formData.itemName} name="itemName" onChange={(e) => inputChange("itemName", e.target.value)} />
+                            <Input type='text' name="itemName" onChange={handleInput} value={formData.itemName} />
                             <span><Text fontSize='sm' color='red'>{formData.error_list.itemName}</Text></span>
                             <FormLabel>ステータス</FormLabel>
                             <RadioGroup value={formData.itemStatus} onChange={(v) => inputChange("itemStatus", v)}>
