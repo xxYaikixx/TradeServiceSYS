@@ -40,7 +40,7 @@ export const ItemInfo = (props) => {
                                 <Container>
                                     配送方法:{SHIPPING_METHOD[shippingMethod]}
                                 </Container>
-                                <ModalWindow imageSrc={imageSrc} itemComment={itemComment} itemAuthor={itemAuthor} nickname={nicknamep} />
+                                <ModalWindow imageSrc={imageSrc} itemComment={itemComment} itemAuthor={itemAuthor} nickname={nickname} />
                             </Box>
                         </Box>
                     </Box>

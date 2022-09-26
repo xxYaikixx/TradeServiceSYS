@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
+import axios from 'axios';
 
 export const NewItem = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -25,40 +26,44 @@ export const NewItem = () => {
         itemTargetName: '',
         itemTargetStatus: '0',
         shippingMethod: '0',
+        error_list: [],
     });
-    const createPost = async () => {
-        if (formData == '') {
-            return;
+
+
+    const createPost = (e) => {
+        e.preventDefault();
+        const data = {
+            itemName: formData.itemName,
+            itemStatus: formData.itemStatus,
+            image: formData.image,
+            comment: formData.comment,
+            user_id: localStorage.auth_id,
+            itemTargetName: formData.itemTargetName,
+            itemTargetStatus: formData.itemTargetStatus,
+            shippingMethod: formData.shippingMethod,
         }
-        await axios
-            .post('/api/posts/create', {
-                itemName: formData.itemName,
-                itemStatus: formData.itemStatus,
-                image: formData.image,
-                comment: formData.comment,
-                user_id: localStorage.auth_id,
-                itemTargetName: formData.itemTargetName,
-                itemTargetStatus: formData.itemTargetStatus,
-                shippingMethod: formData.shippingMethod,
-            })
-            .then((response) => {
-                const tempPosts = posts
-                tempPosts.push(response.data);
-                setPosts(tempPosts)
-                setFormData({
-                    itemName: '',
-                    itemStatus: '0',
-                    // image: '',
-                    comment: '',
-                    user_id: localStorage.auth_id,
-                    itemTargetName: '',
-                    itemTargetStatus: '0',
-                    shippingMethod: '0',
-                });
-                navigate("/");
+        axios.post('/api/posts/create', data)
+            .then(res => {
+                if (res.status === 200) {
+                    const tempPosts = posts
+                    tempPosts.push(res.data);
+                    setPosts(tempPosts)
+                    setFormData({
+                        itemName: '',
+                        itemStatus: '0',
+                        // image: '',
+                        comment: '',
+                        user_id: localStorage.auth_id,
+                        itemTargetName: '',
+                        itemTargetStatus: '0',
+                        shippingMethod: '0',
+                    });
+                    navigate("/");
+                }
             }
             )
             .catch(error => {
+                console.log(error);
                 console.log('通信に失敗しました');
             });
 
@@ -77,10 +82,10 @@ export const NewItem = () => {
 
                     <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={5}>
-
                             <FormLabel>アイテム名 </FormLabel>
                             <Input type='text'
                                 value={formData.itemName} name="itemName" onChange={(e) => inputChange("itemName", e.target.value)} />
+                            <span><Text fontSize='sm' color='red'>{formData.error_list.itemName}</Text></span>
                             <FormLabel>ステータス</FormLabel>
                             <RadioGroup value={formData.itemStatus} onChange={(v) => inputChange("itemStatus", v)}>
                                 <Stack direction='row'>
