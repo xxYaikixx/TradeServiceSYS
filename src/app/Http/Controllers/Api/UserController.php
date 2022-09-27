@@ -18,7 +18,7 @@ class UserController extends Controller
             'name' => 'required',
             'nickname' => 'required',
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required|same:password2',
             'zipcode' => 'required',
             'address' => 'required',
         ]);

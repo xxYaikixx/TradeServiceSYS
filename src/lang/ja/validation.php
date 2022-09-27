@@ -125,7 +125,7 @@ return [
     'required_with_all' => 'The :attribute field is required when :values are present.',
     'required_without' => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same' => 'The :attribute and :other must match.',
+    'same' => ':attribute と :other が一致していません。',
     'size' => [
         'array' => 'The :attribute must contain :size items.',
         'file' => 'The :attribute must be :size kilobytes.',
@@ -169,15 +169,20 @@ return [
     */
 
     'attributes' => [
-        'email'=>'メールアドレス',
-        'password'=>'パスワード',
-        'itemName'=>'アイテム名',
-        'itemStatus'=>'ステータス',
-        'image'=>'画像',
-        'comment'=>'コメント・補足',
-        'itemTargetName'=>'交換対象',
-        'itemTargetStatus'=>'交換条件',
-        'shippingMethod'=>'配送方法',
+        'name' => '氏名',
+        'nickname' => '表示名',
+        'email'=> 'メールアドレス',
+        'password' => 'パスワード',
+        'password2' => 'パスワード（確認）',
+        'zipcode' => '郵便番号',
+        'address' => '住所',
+        'itemName' => 'アイテム名',
+        'itemStatus' => 'ステータス',
+        'image' => '画像',
+        'comment' => 'コメント・補足',
+        'itemTargetName' => '交換対象',
+        'itemTargetStatus' => '交換条件',
+        'shippingMethod' => '配送方法',
     ],
 
 ];
