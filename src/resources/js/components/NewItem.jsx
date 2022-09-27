@@ -61,10 +61,10 @@ export const NewItem = () => {
             .catch(error => {
                 console.log(error);
                 if (error.response.status === 400) {
-                    console.log('ELSE');
                     setFormData({ ...formData, error_list: error.response.data.validation_errors });
+                } else {
+                    console.log('通信に失敗しました');
                 }
-                console.log('通信に失敗しました');
             });
 
 
@@ -79,21 +79,25 @@ export const NewItem = () => {
             <ChakraProvider>
                 <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
                 <Box my={5} >
-
                     <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={5}>
-                            <FormLabel>アイテム名 </FormLabel>
-                            <Input type='text' name="itemName" onChange={handleInput} value={formData.itemName} />
-                            <span><Text fontSize='sm' color='red'>{formData.error_list.itemName}</Text></span>
-                            <FormLabel>ステータス</FormLabel>
-                            <RadioGroup value={formData.itemStatus} onChange={(v) => inputChange("itemStatus", v)}>
-                                <Stack direction='row'>
-                                    <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
-                                    <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
-                                    <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
-                                    <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
-                                </Stack>
-                            </RadioGroup>
+                            <Box>
+                                <FormLabel>アイテム名 </FormLabel>
+                                <Input type='text' name="itemName" onChange={handleInput} value={formData.itemName} />
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.itemName}</Text></span>
+                            </Box>
+                            <Box>
+                                <FormLabel>ステータス</FormLabel>
+                                <RadioGroup value={formData.itemStatus} onChange={(v) => inputChange("itemStatus", v)}>
+                                    <Stack direction='row'>
+                                        <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
+                                        <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
+                                        <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
+                                        <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
+                                    </Stack>
+                                </RadioGroup>
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.itemStatus}</Text></span>
+                            </Box>
                             <FormLabel>画像</FormLabel>
                             {/* <Input
                                 id={previewUrl}
@@ -106,31 +110,43 @@ export const NewItem = () => {
                             {/* <Input type="file" onChange={(e) => {
                                 inputChange("image", e.target.files[0]);
                             }} accept="image/*" multiple ref={inputRef} name="image" /> */}
-                            <FormLabel>コメント・補足</FormLabel>
-                            <Textarea type='text'
-                                onChange={(e) => inputChange("comment", e.target.value)} value={formData.comment} name="comment" />
-                            <FormLabel>交換対象</FormLabel>
-                            <Input type='text'
-                                onChange={(e) => inputChange("itemTargetName", e.target.value)} value={formData.itemTargetName} name="itemTargetName" />
-                            <FormLabel>交換条件</FormLabel>
-                            <RadioGroup onChange={(v) => inputChange("itemTargetStatus", v)} value={formData.itemTargetStatus} name="itemTargetStatus">
-                                <Stack direction='row'>
-                                    <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
-                                    <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
-                                    <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
-                                    <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
-                                </Stack>
-                            </RadioGroup>
-                            <FormLabel>郵送方法</FormLabel>
-                            <RadioGroup onChange={(v) => inputChange("shippingMethod", v)} value={formData.shippingMethod} name="shippingMethod">
-                                <Stack direction='row'>
-                                    <Radio value='0'><Text fontSize='sm'>手渡し</Text></Radio>
-                                    <Radio value='1'><Text fontSize='sm'>郵便（記名）</Text></Radio>
-                                    <Radio value='2'><Text fontSize='sm'>郵便（匿名）</Text></Radio>
-                                    <Radio value='3'><Text fontSize='sm'>宅配（記名）</Text></Radio>
-                                    <Radio value='4'><Text fontSize='sm'>宅配（匿名）</Text></Radio>
-                                </Stack>
-                            </RadioGroup>
+                            <Box>
+                                <FormLabel>コメント・補足</FormLabel>
+                                <Textarea type='text'
+                                    onChange={(e) => inputChange("comment", e.target.value)} value={formData.comment} name="comment" />
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.comment}</Text></span>
+                            </Box>
+                            <Box>
+                                <FormLabel>交換対象</FormLabel>
+                                <Input type='text'
+                                    onChange={(e) => inputChange("itemTargetName", e.target.value)} value={formData.itemTargetName} name="itemTargetName" />
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.itemTargetName}</Text></span>
+                            </Box>
+                            <Box>
+                                <FormLabel>交換条件</FormLabel>
+                                <RadioGroup onChange={(v) => inputChange("itemTargetStatus", v)} value={formData.itemTargetStatus} name="itemTargetStatus">
+                                    <Stack direction='row'>
+                                        <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
+                                        <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
+                                        <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
+                                        <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
+                                    </Stack>
+                                </RadioGroup>
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.itemTargetStatus}</Text></span>
+                            </Box>
+                            <Box>
+                                <FormLabel>郵送方法</FormLabel>
+                                <RadioGroup onChange={(v) => inputChange("shippingMethod", v)} value={formData.shippingMethod} name="shippingMethod">
+                                    <Stack direction='row'>
+                                        <Radio value='0'><Text fontSize='sm'>手渡し</Text></Radio>
+                                        <Radio value='1'><Text fontSize='sm'>郵便（記名）</Text></Radio>
+                                        <Radio value='2'><Text fontSize='sm'>郵便（匿名）</Text></Radio>
+                                        <Radio value='3'><Text fontSize='sm'>宅配（記名）</Text></Radio>
+                                        <Radio value='4'><Text fontSize='sm'>宅配（匿名）</Text></Radio>
+                                    </Stack>
+                                </RadioGroup>
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.shippingMethod}</Text></span>
+                            </Box>
                             <Button colorScheme='blue' onClick={createPost}>確認</Button>
                         </Stack>
                     </Container>

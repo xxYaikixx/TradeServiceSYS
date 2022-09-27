@@ -172,6 +172,12 @@ return [
         'email'=>'メールアドレス',
         'password'=>'パスワード',
         'itemName'=>'アイテム名',
+        'itemStatus'=>'ステータス',
+        'image'=>'画像',
+        'comment'=>'コメント・補足',
+        'itemTargetName'=>'交換対象',
+        'itemTargetStatus'=>'交換条件',
+        'shippingMethod'=>'配送方法',
     ],
 
 ];

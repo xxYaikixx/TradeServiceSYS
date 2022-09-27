@@ -26,6 +26,11 @@ class ItemController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'itemName' => 'required',
+            'itemStatus' => 'required',
+            'comment' => 'required',
+            'itemTargetName' => 'required',
+            'itemTargetStatus' => 'required',
+            'shippingMethod' => 'required',
         ]);
 
         
