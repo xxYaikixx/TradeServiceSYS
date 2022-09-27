@@ -66,7 +66,7 @@ export const Header = (props) => {
                         </DrawerContent>
                     </Drawer>
                     <Box p='2'>
-                        <Link to="/"><Heading size='md'>ガチャガチャ景品マッチングサービス</Heading></Link>
+                        <Heading size='md'>ガチャガチャ景品マッチングサービス</Heading>
                     </Box>
                     <Spacer />
                     <Flex minWidth='max-content' alignItems='center' gap='2' py={1} bg='#a3d1ff' color='gray.600'>
@@ -106,6 +106,10 @@ export const Header = (props) => {
                         <DrawerCloseButton />
                         <DrawerHeader color='gray.700'>Menu</DrawerHeader>
                         <DrawerBody>
+                            <Button w='100%' bg='transparent'>
+                                <AddIcon pr={2} />
+                                <Link to="/regieter">会員登録</Link>
+                            </Button>
                             <Button w='100%' bg='transparent'>
                                 <QuestionOutlineIcon pr={2} />
                                 使用ガイド
