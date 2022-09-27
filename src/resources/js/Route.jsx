@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { Top } from "./components/Top";
 import { Login } from "./components/Login";
 import { NewItem } from "./components/NewItem";
+import { Register } from "./components/Register";
 import { createRoot } from 'react-dom/client';
 
 import axios from 'axios';
@@ -28,6 +29,7 @@ export const Example = () => {
                             <Route path="/" element={<Top />} />
                             <Route path="/login" element={<Login />} />;
                             <Route path="/new" element={<NewItem />} />;
+                            <Route path="/register" element={<Register />} />;
                         </Routes>
                     </>
                 </BrowserRouter>

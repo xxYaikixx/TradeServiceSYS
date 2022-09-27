@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Log;
 Route::group(['middleware' => 'api'], function () {
     Route::get('posts', 'App\Http\Controllers\Api\ItemController@index');
     Route::post('posts/create', 'App\Http\Controllers\Api\ItemController@create');
+    Route::post('posts/register', 'App\Http\Controllers\Api\UserController@create');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
