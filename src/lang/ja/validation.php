@@ -110,7 +110,7 @@ return [
     'prohibited_if' => ':otherが:valueの場合、:attributeは入力禁止です。',
     'prohibited_unless'    => ':otherが:valueでない場合、:attributeは入力禁止です。',
     'prohibits'            => 'attributeは:otherの入力を禁じています。',
-    'same'                 => ':attributeと:otherには同じ値を指定してください。',
+    'same'                 => ':attributeと:otherが一致していません。',
     'size'                 => [
         'numeric' => ':attributeは:sizeを指定してください。',
         'file'    => ':attributeのファイルは、:sizeキロバイトでなくてはなりません。',
