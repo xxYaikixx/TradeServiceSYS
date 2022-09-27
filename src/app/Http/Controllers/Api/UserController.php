@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
+use Validator;
 
 class UserController extends Controller
 {
@@ -25,14 +29,15 @@ class UserController extends Controller
             ], 400);
         } else {
             // $path = $request->file('image')->store('images');
-            $item = new Item;
-            $item->name = $request->name;
-            $item->nickname = $request->nickname;
-            $item->password = $request->password;
-            // $item->image = $request->file('image')->getClientOriginalName();
-            $item->zipcode =  $request->zipcode;
-            $item->address = $request->address;
-            $item->save();
+            $user = new User;
+            $user->name = $request->name;
+            $user->nickname = $request->nickname;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->zipcode =  $request->zipcode;
+            $user->address = $request->address;
+            $user->email_verified_at = Carbon::now();
+            $user->save();
         }
     }
 }

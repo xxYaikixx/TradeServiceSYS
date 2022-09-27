@@ -52,7 +52,7 @@ export const Register = () => {
                     zipcode: '',
                     address: '',
                 });
-                navigate("/");
+                navigate("/login");
             }
             )
             .catch(error => {
@@ -97,7 +97,7 @@ export const Register = () => {
                             }} accept="image/*" multiple ref={inputRef} name="image" /> */}
                             <Box>
                                 <FormLabel>メールアドレス</FormLabel>
-                                <Input type='text' name="nickname" onChange={handleInput} value={formData.email} />
+                                <Input type='text' name="email" onChange={handleInput} value={formData.email} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.email}</Text></span>
                             </Box>
                             <Box>
