@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -33,7 +34,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->nickname = $request->nickname;
             $user->email = $request->email;
-            $user->password = $request->password;
+            $user->password = Hash::make($request->password);
             $user->zipcode =  $request->zipcode;
             $user->address = $request->address;
             $user->email_verified_at = Carbon::now();
