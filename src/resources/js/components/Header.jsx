@@ -108,7 +108,7 @@ export const Header = (props) => {
                         <DrawerBody>
                             <Button w='100%' bg='transparent'>
                                 <AddIcon pr={2} />
-                                <Link to="/regieter">会員登録</Link>
+                                <Link to="/register">会員登録</Link>
                             </Button>
                             <Button w='100%' bg='transparent'>
                                 <QuestionOutlineIcon pr={2} />
