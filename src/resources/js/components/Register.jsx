@@ -113,8 +113,7 @@ export const Register = () => {
                             </Box>
                             <Box>
                                 <FormLabel>住所</FormLabel>
-                                <Input value={!loading && address ? address.prefecture + address.address1 + address.address2 + address.address3 + address.address4 : ''} />
-
+                                <Input value={loading || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address}</Text></span>
                             </Box>
                             <Box>
