@@ -68,9 +68,6 @@ export const Register = () => {
             });
     }
 
-    console.log(value);
-    console.log(address);
-
     return (
         <>
             <ChakraProvider>
