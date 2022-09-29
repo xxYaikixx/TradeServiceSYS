@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
 import axios from 'axios';
+import { usePostalJp } from 'use-postal-jp'
 
 export const Register = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [posts, setPosts] = useState([]);
+    const [value, setValue] = useState('')
+    const [address, loading, error] = usePostalJp(value, value.length >= 7)
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -65,6 +68,8 @@ export const Register = () => {
             });
     }
 
+    console.log(address);
+
     return (
         <>
             <ChakraProvider>
@@ -102,12 +107,16 @@ export const Register = () => {
                             </Box>
                             <Box>
                                 <FormLabel>郵便番号</FormLabel>
-                                <Input type='text' name="zipcode" onChange={handleInput} value={formData.zipcode} />
+                                <Input type='text' name="zipcode" onChange={(e) => setValue(e.target.value)} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.zipcode}</Text></span>
                             </Box>
                             <Box>
                                 <FormLabel>住所</FormLabel>
-                                <Input name="address" onChange={handleInput} value={formData.address} />
+                                {!loading && value &&
+                                    <>
+                                        <Input value={address.prefecture + address.address1 + address.address2 + address.address3 + address.address4} />
+                                    </>
+                                }
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address}</Text></span>
                             </Box>
                             <Box>
