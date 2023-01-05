@@ -19,5 +19,8 @@ class Item extends Model
         'image',
         'user_id',
         'comment',
+        'change_item_name',
+        'change_item_status',
+        'shipping_method',
     ];
 }

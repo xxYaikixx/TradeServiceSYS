@@ -28,6 +28,9 @@ class ItemTableSeeder extends Seeder
                 'image' => $faker->imageUrl($width = 300, $height = 300),
                 'user_id' => rand(1, 4),
                 'comment' => $faker->realText($maxNbChars = 50),
+                'change_item_name' => 'カプセルトイ（スナッフィー）',
+                'change_item_status' => rand(0, 3),
+                'shipping_method' => rand(0, 4),
             ],
             [
                 'name' => 'カプセルトイ（雪の日のうさこちゃん）',
@@ -35,6 +38,9 @@ class ItemTableSeeder extends Seeder
                 'image' => $faker->imageUrl($width = 300, $height = 300),
                 'user_id' => rand(1, 4),
                 'comment' => $faker->realText($maxNbChars = 50),
+                'change_item_name' => 'カプセルトイ（ボリス）',
+                'change_item_status' => rand(0, 3),
+                'shipping_method' => rand(0, 4),
             ],
             [
                 'name' => 'カプセルトイ（ボリス）',
@@ -42,6 +48,9 @@ class ItemTableSeeder extends Seeder
                 'image' => $faker->imageUrl($width = 300, $height = 300),
                 'user_id' => rand(1, 4),
                 'comment' => $faker->realText($maxNbChars = 50),
+                'change_item_name' => 'カプセルトイ（ミッフィーのママ）',
+                'change_item_status' => rand(0, 3),
+                'shipping_method' => rand(0, 4),
             ],
             [
                 'name' => 'カプセルトイ（ミッフィーのパパ）',
@@ -49,6 +58,9 @@ class ItemTableSeeder extends Seeder
                 'image' => $faker->imageUrl($width = 300, $height = 300),
                 'user_id' => rand(1, 4),
                 'comment' => $faker->realText($maxNbChars = 50),
+                'change_item_name' => 'カプセルトイ（スナッフィー）',
+                'change_item_status' => rand(0, 3),
+                'shipping_method' => rand(0, 4),
             ],
         ];
         $now = Carbon::now();
