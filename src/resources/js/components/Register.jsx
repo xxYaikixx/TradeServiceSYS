@@ -1,5 +1,5 @@
 
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
@@ -10,8 +10,8 @@ export const Register = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [posts, setPosts] = useState([]);
-    const [value, setValue] = useState('')
-    const [address, loading, error] = usePostalJp(value, value.length >= 7)
+    const [zipcode, setZipcode] = useState('')
+    const [address, loading, error] = usePostalJp(zipcode, zipcode.length >= 7)
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -25,6 +25,13 @@ export const Register = () => {
         // thumbnail: '',
         error_list: [],
     });
+    // console.log(formData);
+
+    useEffect(() => {
+        setFormData({ ...formData, address: address, zipcode: zipcode });
+    }, [address])
+
+
     const handleInput = (e) => {
         e.persist();
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -105,7 +112,7 @@ export const Register = () => {
                             </Box>
                             <Box>
                                 <FormLabel>郵便番号</FormLabel>
-                                <Input type='text' name="zipcode" onChange={(e) => setValue(e.target.value)} />
+                                <Input type='text' name="zipcode" onChange={(e) => setZipcode(e.target.value)} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.zipcode}</Text></span>
                             </Box>
                             <Box>
