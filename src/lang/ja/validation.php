@@ -162,6 +162,7 @@ return [
         'password2' => 'パスワード（確認）',
         'zipcode' => '郵便番号',
         'address' => '住所',
+        'address2' => '住所（続き）',
         'itemName' => 'アイテム名',
         'itemStatus' => 'ステータス',
         'image' => '画像',

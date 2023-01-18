@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('name');
             $table->char('zipcode', 7);
             $table->string('address');
+            $table->string('address2');
             $table->timestamps();
         });
     }

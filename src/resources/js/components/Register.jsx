@@ -22,6 +22,7 @@ export const Register = () => {
         password2: '',
         zipcode: '',
         address: '',
+        address2: '',
         // thumbnail: '',
         error_list: [],
     });
@@ -47,6 +48,7 @@ export const Register = () => {
             password2: formData.password2,
             zipcode: formData.zipcode,
             address: formData.address,
+            address2: formData.address2,
         }
         axios.post('/api/posts/register', data)
             .then(res => {
@@ -61,6 +63,7 @@ export const Register = () => {
                     password2: '',
                     zipcode: '',
                     address: '',
+                    address2: '',
                 });
                 navigate("/login");
             }
@@ -119,6 +122,11 @@ export const Register = () => {
                                 <FormLabel>住所</FormLabel>
                                 <Input isReadOnly={true} value={loading || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address}</Text></span>
+                            </Box>
+                            <Box>
+                                <FormLabel>住所(続き)</FormLabel>
+                                <Input type='text' name="address2" onChange={handleInput} value={formData.address2} />
+                                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address2}</Text></span>
                             </Box>
                             <Box>
                                 <FormLabel>パスワード</FormLabel>
