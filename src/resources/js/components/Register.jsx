@@ -130,13 +130,13 @@ export const Register = () => {
                             </Box>
                             <Box>
                                 <FormLabel>パスワード</FormLabel>
-                                <Input type='text' name="password"
+                                <Input type='password' name="password"
                                     onChange={handleInput} value={formData.password} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.password}</Text></span>
                             </Box>
                             <Box>
                                 <FormLabel>パスワード(確認)</FormLabel>
-                                <Input type='text' name="password2"
+                                <Input type='password' name="password2"
                                     onChange={handleInput} value={formData.password2} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.password2}</Text></span>
                             </Box>
