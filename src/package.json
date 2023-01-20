@@ -25,6 +25,7 @@
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "framer-motion": "^8.1.8",
+        "react-hook-form": "^7.42.1",
         "sweetalert": "^2.1.2",
         "use-postal-jp": "^2.0.2"
     }
