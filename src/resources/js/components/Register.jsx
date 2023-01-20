@@ -1,7 +1,7 @@
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, FormLabel, Heading, Input, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
 import axios from 'axios';
 import { usePostalJp } from 'use-postal-jp'
@@ -144,10 +144,7 @@ export const Register = () => {
                         </Stack>
                     </Container>
                 </Box>
-
             </ChakraProvider >
-
-
         </>
     );
 }
