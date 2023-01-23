@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, FormControl, FormLabel, Heading, Input, Stack, Text, useDisclosure } from '@chakra-ui/react';
-import { Header } from './Header';
-import axios from 'axios';
-import { usePostalJp } from 'use-postal-jp'
+import { useLocation } from 'react-router-dom';
 
-export const RegisterConfirm = (props) => {
-    const { values, hideConfirmation } = props
-    console.log(values);
+export const RegisterConfirm = () => {
+    const location = useLocation();
+    console.log("aaa");
+    console.log(location.state);
     //propsで渡ってきたvaluesを受けとって入力内容確認画面で表示
     return (
         <>

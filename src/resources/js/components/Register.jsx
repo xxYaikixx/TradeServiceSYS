@@ -23,13 +23,12 @@ export const Register = () => {
     //isConfirmationVisibleの初期値はfalseで入力内容確認画面は非表示に
     const hideConfirmation = () => setIsConfirmationVisible(false)
     //入力内容確認画面の閉じるボタンを押した時非表示にする関数を宣言
-    const onSubmitData = (data) => {
-        // console.log(data);
-        navigate('/register/confirm');
-        return setIsConfirmationVisible(true);
-    }
+    // const onSubmitData = (data) => {
+    //     // console.log(data);
+    //     console.log(getValues());
+    //     return setIsConfirmationVisible(true);
+    // }
     //submitボタンを押した時、入力内容確認画面を表示させる
-
 
     const [formData, setFormData] = useState({
         name: '',
@@ -43,7 +42,6 @@ export const Register = () => {
         // thumbnail: '',
         error_list: [],
     });
-    // console.log(formData);
 
     useEffect(() => {
         setFormData({ ...formData, address: address, zipcode: zipcode });
@@ -58,7 +56,7 @@ export const Register = () => {
     return (
         <>
             <ChakraProvider>
-                <form onSubmit={handleSubmit(onSubmitData)} className='contactBox'>
+                <form className='contactBox'>
                     <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
                     <Box my={5} >
                         <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
@@ -85,8 +83,8 @@ export const Register = () => {
                                 onChange={onFileInputChange}
                             /> */}
                                 {/* <Input type="file" onChange={(e) => {
-                                inputChange("image", e.target.files[0]);
-                            }} accept="image/*" multiple ref={inputRef} name="image" /> */}
+                                    inputChange("image", e.target.files[0]);
+                                }} accept="image/*" multiple ref={inputRef} name="image" /> */}
                                 <Box>
                                     <FormLabel>メールアドレス</FormLabel>
                                     <Input type='text' name="email" {...register("email")} />
@@ -119,7 +117,9 @@ export const Register = () => {
                                         {...register("password2")} />
                                     <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.password2}</Text></span>
                                 </Box>
-                                <Button colorScheme='blue' type='submit'>確認</Button>
+                                <Button colorScheme='blue' onClick={() => {
+                                    return navigate('/register/confirm', { state: getValues() });
+                                }}>確認</Button>
                             </Stack>
                         </Container>
                     </Box>
