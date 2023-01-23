@@ -8,6 +8,7 @@ import { Register } from "./components/Register";
 import { createRoot } from 'react-dom/client';
 
 import axios from 'axios';
+import { RegisterConfirm } from './components/RegisterConfirm';
 
 axios.defaults.baseURL = "http://localhost/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -30,6 +31,7 @@ export const Example = () => {
                             <Route path="/login" element={<Login />} />;
                             <Route path="/new" element={<NewItem />} />;
                             <Route path="/register" element={<Register />} />;
+                            <Route path="/register/confirm" element={<RegisterConfirm />} />;
                         </Routes>
                     </>
                 </BrowserRouter>

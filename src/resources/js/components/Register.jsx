@@ -24,7 +24,8 @@ export const Register = () => {
     const hideConfirmation = () => setIsConfirmationVisible(false)
     //入力内容確認画面の閉じるボタンを押した時非表示にする関数を宣言
     const onSubmitData = (data) => {
-        console.log(data);
+        // console.log(data);
+        navigate('/register/confirm');
         return setIsConfirmationVisible(true);
     }
     //submitボタンを押した時、入力内容確認画面を表示させる
@@ -98,7 +99,7 @@ export const Register = () => {
                                 </Box>
                                 <Box>
                                     <FormLabel>住所</FormLabel>
-                                    <Input isReadOnly={true} {...register("address")} value={loading || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4} />
+                                    <Input isReadOnly={true} value={loading || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4} {...register("address")} />
                                     <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address}</Text></span>
                                 </Box>
                                 <Box>
