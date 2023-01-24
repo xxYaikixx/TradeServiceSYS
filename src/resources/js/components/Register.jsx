@@ -62,7 +62,7 @@ export const Register = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.nickname}>
-                                    <FormLabel>表示名</FormLabel>
+                                    <FormLabel htmlFor='nickname'>表示名</FormLabel>
                                     <Input
                                         id='nickname'
                                         placeholder='表示名'
@@ -75,7 +75,7 @@ export const Register = () => {
                                 </FormControl>
                                 <FormLabel>サムネイル</FormLabel>
                                 <FormControl isInvalid={errors.email}>
-                                    <FormLabel>メールアドレス</FormLabel>
+                                    <FormLabel htmlFor='email'>メールアドレス</FormLabel>
                                     <Input
                                         id='email'
                                         placeholder='メールアドレス'
@@ -87,7 +87,7 @@ export const Register = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.zipcode}>
-                                    <FormLabel>郵便番号</FormLabel>
+                                    <FormLabel htmlFor='zipcode'>郵便番号</FormLabel>
                                     <Input
                                         id='zipcode'
                                         placeholder='郵便番号'
@@ -101,7 +101,7 @@ export const Register = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.address}>
-                                    <FormLabel>住所</FormLabel>
+                                    <FormLabel htmlFor='address'>住所</FormLabel>
                                     <Input isReadOnly={true}
                                         id='address'
                                         placeholder='住所'
@@ -115,7 +115,7 @@ export const Register = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.address2}>
-                                    <FormLabel>住所（続き）</FormLabel>
+                                    <FormLabel htmlFor='address2'>住所（続き）</FormLabel>
                                     <Input
                                         id='address2'
                                         placeholder='住所（続き）'
@@ -128,7 +128,7 @@ export const Register = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.password}>
-                                    <FormLabel>パスワード</FormLabel>
+                                    <FormLabel htmlFor='password2'>パスワード</FormLabel>
                                     <Input
                                         type='password'
                                         id='password'
@@ -141,7 +141,7 @@ export const Register = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.password2}>
-                                    <FormLabel>パスワード（確認）</FormLabel>
+                                    <FormLabel htmlFor='password2'>パスワード（確認）</FormLabel>
                                     <Input
                                         type='password'
                                         id='password2'
