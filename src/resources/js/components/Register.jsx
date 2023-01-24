@@ -9,33 +9,15 @@ import { useForm } from 'react-hook-form';
 export const Register = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-    const [posts, setPosts] = useState([]);
     const [zipcode, setZipcode] = useState('')
     const [address, loading, error] = usePostalJp(zipcode, zipcode.length >= 7)
     const navigate = useNavigate();
-    // const { register, handleSubmit, watch, reset, errors, getValues } = useForm()
-
-
-    const [formData, setFormData] = useState({
-        name: '',
-        nickname: '',
-        email: '',
-        password: '',
-        password2: '',
-        zipcode: '',
-        address: '',
-        address2: '',
-        // thumbnail: '',
-        error_list: [],
-    });
-
     const {
         getValues,
         handleSubmit,
         register,
         formState: { errors, isSubmitting },
     } = useForm()
-
     function onSubmit() {
         return navigate('/register/confirm', { state: getValues() });
     }
