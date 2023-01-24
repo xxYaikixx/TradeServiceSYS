@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, ChakraProvider, FormControl, FormLabel, Heading, Input, Stack, Text, useDisclosure, Container } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, FormControl, FormLabel, Heading, Input, Stack, Text, useDisclosure, Container, FormErrorMessage } from '@chakra-ui/react';
 import { Header } from './Header';
 import axios from 'axios';
 import { usePostalJp } from 'use-postal-jp';
@@ -15,20 +15,8 @@ export const Register = () => {
     const [zipcode, setZipcode] = useState('')
     const [address, loading, error] = usePostalJp(zipcode, zipcode.length >= 7)
     const navigate = useNavigate();
-    const { register, handleSubmit, watch, reset, errors, getValues } = useForm()
-    //useFormを呼び出して使いたいメソッドを書く
-    const [isConfirmationVisible, setIsConfirmationVisible] = useState(false)
+    // const { register, handleSubmit, watch, reset, errors, getValues } = useForm()
 
-    //isConfirmationVisibleにstateを持たせて、入力内容確認画面の表示・非表示をコントロール
-    //isConfirmationVisibleの初期値はfalseで入力内容確認画面は非表示に
-    const hideConfirmation = () => setIsConfirmationVisible(false)
-    //入力内容確認画面の閉じるボタンを押した時非表示にする関数を宣言
-    // const onSubmitData = (data) => {
-    //     // console.log(data);
-    //     console.log(getValues());
-    //     return setIsConfirmationVisible(true);
-    // }
-    //submitボタンを押した時、入力内容確認画面を表示させる
 
     const [formData, setFormData] = useState({
         name: '',
@@ -43,22 +31,56 @@ export const Register = () => {
         error_list: [],
     });
 
-    useEffect(() => {
-        setFormData({ ...formData, address: address, zipcode: zipcode });
-    }, [address])
+    // useEffect(() => {
+    //     setFormData({ ...formData, address: address, zipcode: zipcode });
+    // }, [address])
 
 
-    const handleInput = (e) => {
-        e.persist();
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    // const handleInput = (e) => {
+    //     e.persist();
+    //     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // }
+
+    const {
+        getValues,
+        handleSubmit,
+        register,
+        formState: { errors, isSubmitting },
+    } = useForm()
+
+    function onSubmit(values) {
+        console.log("submit");
+        return navigate('/register/confirm', { state: getValues() });
     }
 
     return (
         <>
             <ChakraProvider>
-                <form className='contactBox'>
-                    <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
-                    <Box my={5} >
+                <Header btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
+                <Box my={5} >
+                    <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <FormControl isInvalid={errors.name}>
+                                <FormLabel htmlFor='name'>氏名</FormLabel>
+                                <Input
+                                    id='name'
+                                    placeholder='氏名'
+                                    {...register('name', {
+                                        required: '氏名を入力してください',
+                                    })}
+                                />
+                                <FormErrorMessage>
+                                    {errors.name && errors.name.message}
+                                </FormErrorMessage>
+                            </FormControl>
+                            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
+                                確認
+                            </Button>
+                        </form>
+                    </Container>
+                </Box>
+            </ChakraProvider >
+            {/* <Box my={5} >
                         <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                             <Heading as='h2' size='xl' align='center' my={5} color='gray.700'>会員登録</Heading>
                             <Stack spacing={5}>
@@ -66,15 +88,15 @@ export const Register = () => {
                                     <FormLabel>氏名</FormLabel>
                                     <Input type='text' name="name" {...register("name")} />
                                     {/* <Input type='text' name="name" onChange={handleInput} value={formData.name} {...register("simei")} /> */}
-                                    <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.name}</Text></span>
-                                </Box>
-                                <Box>
-                                    <FormLabel>表示名</FormLabel>
-                                    <Input type='text' name="nickname" {...register("nickname")} />
-                                    <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.nickname}</Text></span>
-                                </Box>
-                                <FormLabel>サムネイル</FormLabel>
-                                {/* <Input
+            {/* <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.name}</Text></span> */}
+            {/* </Box>
+            <Box>
+                <FormLabel>表示名</FormLabel>
+                <Input type='text' name="nickname" {...register("nickname")} />
+                <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.nickname}</Text></span>
+            </Box>
+            <FormLabel>サムネイル</FormLabel> */}
+            {/* <Input
                                 id={previewUrl}
                                 ref={inputRef}
                                 name={previewUrl}
@@ -82,10 +104,10 @@ export const Register = () => {
                                 accept="image/*"
                                 onChange={onFileInputChange}
                             /> */}
-                                {/* <Input type="file" onChange={(e) => {
+            {/* <Input type="file" onChange={(e) => {
                                     inputChange("image", e.target.files[0]);
                                 }} accept="image/*" multiple ref={inputRef} name="image" /> */}
-                                <Box>
+            {/* <Box>
                                     <FormLabel>メールアドレス</FormLabel>
                                     <Input type='text' name="email" {...register("email")} />
                                     <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.email}</Text></span>
@@ -99,8 +121,8 @@ export const Register = () => {
                                     <FormLabel>住所</FormLabel>
                                     <Input isReadOnly={true} value={loading || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4} {...register("address")} />
                                     <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address}</Text></span>
-                                </Box>
-                                <Box>
+                                </Box> */}
+            {/* <Box>
                                     <FormLabel>住所(続き)</FormLabel>
                                     <Input type='text' name="address2" {...register("address2")} />
                                     <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.address2}</Text></span>
@@ -120,18 +142,7 @@ export const Register = () => {
                                 <Button colorScheme='blue' onClick={() => {
                                     return navigate('/register/confirm', { state: getValues() });
                                 }}>確認</Button>
-                            </Stack>
-                        </Container>
-                    </Box>
-                </form>
-                {
-                    isConfirmationVisible &&//trueの時だけ入力内容確認画面を表示
-                    <RegisterConfirm//入力内容確認画面コンポーネント
-                        values={getValues()}//getValues()でフォーム全体のデータを返してくれる！！
-                        hideConfirmation={hideConfirmation}//入力内容確認画面表示・非表示のstateをConfirmationに渡す
-                    />
-                }
-            </ChakraProvider >
+                            </Stack>*/}
         </>
     );
 }
