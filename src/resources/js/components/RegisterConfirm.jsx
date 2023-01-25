@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Center, ChakraProvider, Container, FormControl, FormLabel, Heading, Input, InputGroup, InputRightElement, Stack, Text, useDisclosure } from '@chakra-ui/react';
+import { Button, ChakraProvider, Container, FormLabel, Input, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
 
@@ -11,6 +11,34 @@ export const RegisterConfirm = () => {
     const location = useLocation();
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+    const navigate = useNavigate();
+    const createPost = (e) => {
+        const data = {
+            name: location.state.name,
+            nickname: location.state.nickname,
+            email: location.state.email,
+            zipcode: location.state.zipcode,
+            address: location.state.address,
+            address2: location.state.address2,
+            password: location.state.password,
+            password2: location.state.password2,
+        }
+        axios.post('/api/posts/register', data)
+            .then(res => {
+                navigate("/login");
+            }
+            )
+            .catch(error => {
+                console.log(error);
+                if (error.response.status === 400) {
+                    setFormData({ ...location.state, error_list: error.response.data.validation_errors });
+                } else {
+                    console.log('通信に失敗しました');
+                }
+            });
+    }
+
+
     return (
         <>
             <ChakraProvider>
@@ -71,7 +99,7 @@ export const RegisterConfirm = () => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
-                            <Button>登録</Button>
+                            <Button onClick={createPost}>登録</Button>
                         </form>
                     </Container>
                 </Stack>
