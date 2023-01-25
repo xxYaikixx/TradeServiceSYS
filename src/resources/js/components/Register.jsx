@@ -18,9 +18,13 @@ export const Register = () => {
         register,
         formState: { errors, isSubmitting },
     } = useForm()
+    console.log(error);
+
     function onSubmit() {
+        console.log(getValues());
         return navigate('/register/confirm', { state: getValues() });
     }
+
 
     return (
         <>
@@ -87,11 +91,14 @@ export const Register = () => {
                                     <Input isReadOnly={true}
                                         id='address'
                                         placeholder='住所'
-                                        value={zipcode.length < 7 || loading || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4}
+                                        value={zipcode.length < 7 || loading || error !== null || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4}
                                         {...register("address",
                                             {
-                                                required: '住所を入力してください',
-                                            })} />
+
+                                                required: '郵便番号を正しく入力してください',
+                                            })
+                                        }
+                                    />
                                     <FormErrorMessage>
                                         {errors.address && errors.address.message}
                                     </FormErrorMessage>
