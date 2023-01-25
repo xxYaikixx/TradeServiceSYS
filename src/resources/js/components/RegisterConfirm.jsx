@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Button, ChakraProvider, Container, FormLabel, Input, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Center, ChakraProvider, Container, Flex, FormLabel, HStack, Input, InputGroup, InputRightElement, Spacer, Stack, useDisclosure } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
 
@@ -99,8 +99,12 @@ export const RegisterConfirm = () => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
-                            <Button onClick={createPost}>登録</Button>
-                            <Button onClick={() => { navigate("/register") }}>戻る</Button>
+                            <Center>
+                                <HStack spacing='24px' textAlign="center">
+                                    <Button onClick={() => { navigate("/register") }} colorScheme='teal' variant='outline'>戻る</Button>
+                                    <Button onClick={createPost} colorScheme='teal' variant='solid'>登録</Button>
+                                </HStack>
+                            </Center>
                         </form>
                     </Container>
                 </Stack>
