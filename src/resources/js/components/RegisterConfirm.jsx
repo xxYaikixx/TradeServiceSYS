@@ -100,6 +100,7 @@ export const RegisterConfirm = () => {
                                 </InputRightElement>
                             </InputGroup>
                             <Button onClick={createPost}>登録</Button>
+                            <Button onClick={() => { navigate("/register") }}>戻る</Button>
                         </form>
                     </Container>
                 </Stack>
