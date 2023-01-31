@@ -12,6 +12,14 @@ export const Register = () => {
     const [zipcode, setZipcode] = useState('')
     const [address, loading, error] = usePostalJp(zipcode, zipcode.length >= 7)
     const navigate = useNavigate();
+    /*
+        利用するuseFormのメソッド
+        getValues:フォームの値を読み取る処理
+        handleSumbmit:フォームをsubmitした時の処理
+        register:フォームから入力された値のstate管理
+        setValues:フォーム内のフィールドに値をセットする処理
+        formState:フォームの状態をobjectで管理
+    */
     const {
         getValues,
         handleSubmit,
@@ -26,10 +34,10 @@ export const Register = () => {
             ? ''
             : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4)
     }, [address])
+
     function onSubmit() {
         return navigate('/register/confirm', { state: getValues() });
     }
-
 
     return (
         <>
