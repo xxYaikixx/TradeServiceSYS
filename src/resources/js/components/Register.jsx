@@ -5,13 +5,13 @@ import { Header } from './Header';
 import { usePostalJp } from 'use-postal-jp';
 import { useForm } from 'react-hook-form';
 
-
 export const Register = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [zipcode, setZipcode] = useState('')
     const [address, loading, error] = usePostalJp(zipcode, zipcode.length >= 7)
     const navigate = useNavigate();
+    const [file, setFile] = useState('')
     /*
         利用するuseFormのメソッド
         getValues:フォームの値を読み取る処理
@@ -27,6 +27,14 @@ export const Register = () => {
         setValue,
         formState: { errors, isSubmitting },
     } = useForm({ mode: 'onChange' })
+
+    const onChangeFile = (e) => {
+        const files = e.target.files
+        console.log(files[0]);
+        if (files && files[0]) {
+            setFile(files[0])
+        }
+    }
 
     // postalJPからもらったaddressをFormのaddressに保存
     useEffect(() => {
@@ -74,7 +82,21 @@ export const Register = () => {
                                         {errors.nickname && errors.nickname.message}
                                     </FormErrorMessage>
                                 </FormControl>
-                                <FormLabel>サムネイル</FormLabel>
+                                <FormControl isInvalid={errors.thumbnail}>
+                                    <FormLabel>サムネイル</FormLabel>
+                                    <Input
+                                        id="thumbnail"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={onChangeFile}
+                                        {...register("thumbnail", {
+                                            onChange: (e) => { onChangeFile },
+                                            required: 'サムネイルを入力してください',
+                                        })} />
+                                    <FormErrorMessage>
+                                        {errors.thumbnail && errors.thumbnail.message}
+                                    </FormErrorMessage>
+                                </FormControl>
                                 <FormControl isInvalid={errors.email}>
                                     <FormLabel htmlFor='email'>メールアドレス</FormLabel>
                                     <Input
