@@ -22,21 +22,10 @@ export const Register = () => {
 
     // postalJPからもらったaddressをFormのaddressに保存
     useEffect(() => {
-        console.log('useEffect');
-        console.log(address);
         setValue('address', zipcode.length < 7 || loading || error !== null || !address
             ? ''
             : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4)
-        // setValue('spike', address?.address1)
-        console.log(getValues());
     }, [address])
-
-    // console.log(error);
-    console.log('render');
-    console.log(address);
-    console.log(getValues());
-    // console.log(`address: ${address?.address1}`);
-    // console.log(zipcode.length < 7 || loading || error !== null || !address);
     function onSubmit() {
         return navigate('/register/confirm', { state: getValues() });
     }
@@ -101,7 +90,6 @@ export const Register = () => {
                                             },
                                             required: '郵便番号を入力してください',
                                         })}
-                                    // onChange={(e) => }
                                     />
                                     <FormErrorMessage>
                                         {errors.zipcode && errors.zipcode.message}
