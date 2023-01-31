@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Center, ChakraProvider, Container, Flex, FormLabel, HStack, Input, InputGroup, InputRightElement, Spacer, Stack, useDisclosure } from '@chakra-ui/react';
+import { Button, Center, ChakraProvider, Container, Flex, FormLabel, HStack, Input, InputGroup, InputRightElement, Spacer, Stack, useDisclosure } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
 
@@ -12,10 +12,11 @@ export const RegisterConfirm = () => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
     const navigate = useNavigate();
-    const createPost = (e) => {
+    const createPost = async (thumbnail) => {
         const data = {
             name: location.state.name,
             nickname: location.state.nickname,
+            thumbnail: location.state.thumbnail[0],
             email: location.state.email,
             zipcode: location.state.zipcode,
             address: location.state.address,
@@ -23,7 +24,8 @@ export const RegisterConfirm = () => {
             password: location.state.password,
             password2: location.state.password2,
         }
-        axios.post('/api/posts/register', data)
+        const headers = { "content-type": "multipart/form-data" };
+        axios.post('/api/posts/register', data, { headers })
             .then(res => {
                 navigate("/login");
             }
@@ -37,7 +39,6 @@ export const RegisterConfirm = () => {
                 }
             });
     }
-
 
     return (
         <>
@@ -60,6 +61,12 @@ export const RegisterConfirm = () => {
                                 border='0px'
                                 isReadOnly={true}
                                 defaultValue={location.state.nickname} />
+                            <FormLabel htmlFor='' textAlign="center">サムネイル</FormLabel>
+                            <Input
+                                textAlign="center"
+                                border='0px'
+                                isReadOnly={true}
+                                defaultValue={location.state.thumbnail[0].name} />
                             <FormLabel htmlFor='' textAlign="center">メールアドレス</FormLabel>
                             <Input
                                 textAlign="center"

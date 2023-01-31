@@ -8,17 +8,18 @@ use App\Models\User;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     // userを作成する
     public function create(Request $request)
     {
-        Log::info($request);
         $user = new User;
         $user->name = $request->name;
         $user->nickname = $request->nickname;
+        $user->thumbnail = $request->file('thumbnail')->store(
+            'thumbnail'
+        );
         $user->email = $request->email;
         $user->zipcode =  $request->zipcode;
         $user->address = $request->address;
