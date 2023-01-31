@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, ChakraProvider, FormControl, FormLabel, Input, Stack, useDisclosure, Container, FormErrorMessage } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, FormControl, FormLabel, Input, Stack, useDisclosure, Container, FormErrorMessage, Text } from '@chakra-ui/react';
 import { Header } from './Header';
 import { usePostalJp } from 'use-postal-jp';
 import { useForm } from 'react-hook-form';
@@ -16,12 +16,28 @@ export const Register = () => {
         getValues,
         handleSubmit,
         register,
+        setValue,
         formState: { errors, isSubmitting },
-    } = useForm()
-    console.log(error);
+    } = useForm({ mode: 'onChange' })
 
-    function onSubmit() {
+    // postalJPからもらったaddressをFormのaddressに保存
+    useEffect(() => {
+        console.log('useEffect');
+        console.log(address);
+        setValue('address', zipcode.length < 7 || loading || error !== null || !address
+            ? ''
+            : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4)
+        // setValue('spike', address?.address1)
         console.log(getValues());
+    }, [address])
+
+    // console.log(error);
+    console.log('render');
+    console.log(address);
+    console.log(getValues());
+    // console.log(`address: ${address?.address1}`);
+    // console.log(zipcode.length < 7 || loading || error !== null || !address);
+    function onSubmit() {
         return navigate('/register/confirm', { state: getValues() });
     }
 
@@ -33,7 +49,9 @@ export const Register = () => {
                 <Stack spacing={5}>
                     <Box my={5} >
                         <Container minWidth='max-content' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
-                            <form onSubmit={handleSubmit(onSubmit)}>
+                            <form onSubmit={(e) => {
+                                return handleSubmit(onSubmit)(e);
+                            }}>
                                 <FormControl isInvalid={errors.name}>
                                     <FormLabel htmlFor='name'>氏名</FormLabel>
                                     <Input
@@ -78,9 +96,12 @@ export const Register = () => {
                                         id='zipcode'
                                         placeholder='郵便番号'
                                         {...register("zipcode", {
+                                            onChange: (e) => {
+                                                setZipcode(e.target.value);
+                                            },
                                             required: '郵便番号を入力してください',
                                         })}
-                                        onChange={(e) => setZipcode(e.target.value)}
+                                    // onChange={(e) => }
                                     />
                                     <FormErrorMessage>
                                         {errors.zipcode && errors.zipcode.message}
@@ -91,12 +112,10 @@ export const Register = () => {
                                     <Input isReadOnly={true}
                                         id='address'
                                         placeholder='住所'
-                                        value={zipcode.length < 7 || loading || error !== null || !address ? '' : address.prefecture + address.address1 + address.address2 + address.address3 + address.address4}
-                                        {...register("address",
-                                            {
-
-                                                required: '郵便番号を正しく入力してください',
-                                            })
+                                        // useEffectで更新したuseFormのaddressの値を参照している
+                                        {...register("address", {
+                                            required: '郵便番号を正しく入力してください',
+                                        })
                                         }
                                     />
                                     <FormErrorMessage>
