@@ -27,7 +27,9 @@ export const NewItem = () => {
         e.persist();
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
-
+    const inputChange = (key, value) => {
+        setFormData((prev) => ({ ...formData, [key]: value }));
+    }
     const createPost = (e) => {
         e.preventDefault();
         const data = {
@@ -71,9 +73,6 @@ export const NewItem = () => {
 
     }
 
-    const inputChange = (key, value) => {
-        setFormData((prev) => ({ ...formData, [key]: value }));
-    }
     return (
         <>
             <ChakraProvider>
@@ -112,19 +111,19 @@ export const NewItem = () => {
                             }} accept="image/*" multiple ref={inputRef} name="image" /> */}
                             <Box>
                                 <FormLabel>コメント・補足</FormLabel>
-                                <Textarea type='text'
-                                    onChange={(e) => inputChange("comment", e.target.value)} value={formData.comment} name="comment" />
+                                <Textarea type='text' name="comment"
+                                    onChange={handleInput} value={formData.comment} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.comment}</Text></span>
                             </Box>
                             <Box>
                                 <FormLabel>交換対象</FormLabel>
-                                <Input type='text'
-                                    onChange={(e) => inputChange("itemTargetName", e.target.value)} value={formData.itemTargetName} name="itemTargetName" />
+                                <Input type='text' name="itemTargetName"
+                                    onChange={handleInput} value={formData.itemTargetName} />
                                 <span><Text fontSize='sm' color='red' align='left'>{formData.error_list.itemTargetName}</Text></span>
                             </Box>
                             <Box>
                                 <FormLabel>交換条件</FormLabel>
-                                <RadioGroup onChange={(v) => inputChange("itemTargetStatus", v)} value={formData.itemTargetStatus} name="itemTargetStatus">
+                                <RadioGroup name="itemTargetStatus" onChange={(v) => inputChange("itemTargetStatus", v)} value={formData.itemTargetStatus}>
                                     <Stack direction='row'>
                                         <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
                                         <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
@@ -136,7 +135,7 @@ export const NewItem = () => {
                             </Box>
                             <Box>
                                 <FormLabel>郵送方法</FormLabel>
-                                <RadioGroup onChange={(v) => inputChange("shippingMethod", v)} value={formData.shippingMethod} name="shippingMethod">
+                                <RadioGroup name="shippingMethod" onChange={(v) => inputChange("shippingMethod", v)} value={formData.shippingMethod}>
                                     <Stack direction='row'>
                                         <Radio value='0'><Text fontSize='sm'>手渡し</Text></Radio>
                                         <Radio value='1'><Text fontSize='sm'>郵便（記名）</Text></Radio>
