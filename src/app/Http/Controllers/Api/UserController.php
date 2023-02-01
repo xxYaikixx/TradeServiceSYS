@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -17,9 +18,11 @@ class UserController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->nickname = $request->nickname;
-        $user->thumbnail = $request->file('thumbnail')->store(
-            'thumbnail'
-        );
+        //画像保存
+        $thumbnail = $request->file('thumbnail');
+        $path = Storage::disk('public')->putFile('thumbnail', $thumbnail);
+        $user->thumbnail = $thumbnail;
+        
         $user->email = $request->email;
         $user->zipcode =  $request->zipcode;
         $user->address = $request->address;
