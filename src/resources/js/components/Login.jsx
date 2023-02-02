@@ -53,7 +53,7 @@ export const Login = () => {
                 <Box my={10}>
                     <Container maxW='xl' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={3}>
-                            <Text>{location.state.message}</Text>
+                            <Text>{location.state && location.state.message}</Text>
                             <form onSubmit={loginSubmit}>
                                 <FormLabel>ログインID（メールアドレス）</FormLabel>
                                 <Input type='email' name="email"
