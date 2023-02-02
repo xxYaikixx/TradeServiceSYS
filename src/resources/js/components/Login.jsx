@@ -5,12 +5,13 @@ import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMes
 import { Header } from '../components/Header';
 import axios from 'axios';
 import swal from "sweetalert";
+import { useLocation } from "react-router-dom";
 
 export const Login = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-
     const navigate = useNavigate();
+    const location = useLocation()
     const [loginInput, setLogin] = useState({
         email: '',
         password: '',
@@ -20,15 +21,12 @@ export const Login = () => {
         e.persist();
         setLogin({ ...loginInput, [e.target.name]: e.target.value });
     }
-
     const loginSubmit = (e) => {
         e.preventDefault();
-
         const data = {
             email: loginInput.email,
             password: loginInput.password,
         }
-
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.post(`api/login`, data).then(res => {
                 if (res.data.status === 200) {
@@ -39,7 +37,6 @@ export const Login = () => {
                     swal("ログイン成功", res.data.message, "success");
                     navigate('/');
                     location.reload();
-
                 } else if (res.data.status === 401) {
                     swal("注意", res.data.message, "warning");
                 } else {
@@ -56,6 +53,7 @@ export const Login = () => {
                 <Box my={10}>
                     <Container maxW='xl' borderWidth='1px' borderRadius='lg' alignContent='center' align="center" p={10}>
                         <Stack spacing={3}>
+                            <Text>{location.state.message}</Text>
                             <form onSubmit={loginSubmit}>
                                 <FormLabel>ログインID（メールアドレス）</FormLabel>
                                 <Input type='email' name="email"
