@@ -15,7 +15,7 @@ export const Register = () => {
     /*
         利用するuseFormのメソッド
         getValues:フォームの値を読み取る処理
-        handleSumbmit:フォームをsubmitした時の処理
+        handleSubmit:フォームをsubmitした時の処理
         register:フォームから入力された値のstate管理
         setValues:フォーム内のフィールドに値をセットする処理
         formState:フォームの状態をobjectで管理
