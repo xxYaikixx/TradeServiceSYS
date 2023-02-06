@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class AuthController extends Controller
@@ -36,7 +36,9 @@ class AuthController extends Controller
                     'status'=>200,
                     'id'=>$user->id,
                     'username'=>$user->name,
+                    'url'=>Storage::url($user->thumbnail),
                     'nickname'=>$user->nickname,
+                    'thumbnail'=>$user->thumbnail,
                     'token'=>$token,
                     'message'=>'ログインに成功しました。'
                 ]);
