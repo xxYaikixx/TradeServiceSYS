@@ -31,7 +31,6 @@ class AuthController extends Controller
                 ]);
             } else {
                 $token = $user->createToken($user->email.'_Token')->plainTextToken;
-
                 return response()->json([
                     'status'=>200,
                     'id'=>$user->id,
@@ -48,6 +47,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+        Log::info(auth()->user());
         auth()->user()->tokens()->delete();
         return response()->json([
             'status'=>200,
