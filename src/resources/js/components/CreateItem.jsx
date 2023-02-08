@@ -109,22 +109,65 @@ export const CreateItem = () => {
                                         {errors.itemTargetName && errors.itemTargetName.message}
                                     </FormErrorMessage>
                                 </FormControl>
-                                {/* <FormControl isInvalid={errors.itemTargetStatus}>
-                                    <FormLabel htmlFor='itemTargetStatus'>交換条件</FormLabel>
-                                    <RadioGroup id='itemTargetStatus' {...register('itemTargetStatus', {
-                                        required: '交換条件を入力してください',
-                                    })}>
-                                        <Stack direction='row'>
-                                            <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
-                                            <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
-                                            <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
-                                            <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
-                                        </Stack>
-                                    </RadioGroup>
-                                    <FormErrorMessage>
-                                        {errors.itemTargetStatus && errors.itemTargetStatus.message}
-                                    </FormErrorMessage>
+                                <FormControl isInvalid={errors.itemTargetStatus}>
+                                    <Controller
+                                        render={
+                                            ({ field }) => {
+                                                return (
+                                                    <>
+                                                        <FormLabel htmlFor='itemTargetStatus'> 交換条件 </FormLabel>
+                                                        <RadioGroup {...field}>
+                                                            <Stack direction='row'>
+                                                                <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
+                                                                <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
+                                                                <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
+                                                                <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
+                                                            </Stack>
+                                                        </RadioGroup>
+                                                        <FormErrorMessage>
+                                                            {errors.itemTargetStatus && errors.itemTargetStatus.message}
+                                                        </FormErrorMessage>
+                                                    </>
+                                                );
+                                            }
+                                        }
+                                        rules={{ required: '交換条件を入力してください' }}
+                                        name="itemTargetStatus"
+                                        control={control}
+                                    />
                                 </FormControl>
+                                <FormControl isInvalid={errors.shippingMethod}>
+                                    <Controller
+                                        render={
+                                            ({ field }) => {
+                                                return (
+                                                    <>
+                                                        <FormLabel htmlFor='shippingMethod'> 郵送方法 </FormLabel>
+                                                        <RadioGroup {...field}>
+                                                            <Stack direction='row'>
+                                                                <Radio value='0'><Text fontSize='sm'>手渡し</Text></Radio>
+                                                                <Radio value='1'><Text fontSize='sm'>郵便（記名）</Text></Radio>
+                                                                <Radio value='2'><Text fontSize='sm'>郵便（匿名）</Text></Radio>
+                                                                <Radio value='3'><Text fontSize='sm'>宅配（記名）</Text></Radio>
+                                                                <Radio value='4'><Text fontSize='sm'>宅配（匿名）</Text></Radio>
+                                                            </Stack>
+                                                        </RadioGroup>
+                                                        <FormErrorMessage>
+                                                            {errors.shippingMethod && errors.shippingMethod.message}
+                                                        </FormErrorMessage>
+                                                    </>
+                                                );
+                                            }
+                                        }
+                                        rules={{ required: '郵送方法を入力してください' }}
+                                        name="shippingMethod"
+                                        control={control}
+                                    />
+                                </FormControl>
+
+
+
+                                {/* 
                                 <FormControl isInvalid={errors.shippingMethod}>
                                     <FormLabel>郵送方法</FormLabel>
                                     <RadioGroup id='shippingMethod' {...register('shippingMethod', {

@@ -12,7 +12,7 @@ export const CreateItemConfirm = () => {
     const createPost = async (thumbnail) => {
         const data = {
             itemName: location.state.itemName,
-            // itemStatus: location.state.itemStatus,
+            itemStatus: location.state.itemStatus,
             comment: location.state.comment,
             itemTargetName: location.state.itemTargetName,
             // itemStatus: location.state.itemStatus,
@@ -49,12 +49,12 @@ export const CreateItemConfirm = () => {
                                 border='0px'
                                 isReadOnly={true}
                                 defaultValue={location.state.itemName} />
-                            {/* <FormLabel htmlFor='' textAlign="center">ステータス</FormLabel>
+                            <FormLabel htmlFor='' textAlign="center">ステータス</FormLabel>
                             <Input
                                 textAlign="center"
                                 border='0px'
                                 isReadOnly={true}
-                                defaultValue={location.state.itemStatus} /> */}
+                                defaultValue={location.state.itemStatus} />
                             <FormLabel htmlFor='' textAlign="center">コメント・補足</FormLabel>
                             <Input
                                 textAlign="center"
@@ -67,7 +67,7 @@ export const CreateItemConfirm = () => {
                                 border='0px'
                                 isReadOnly={true}
                                 defaultValue={location.state.itemTargetName} />
-                            {/* <FormLabel htmlFor='' textAlign="center">交換条件</FormLabel>
+                            <FormLabel htmlFor='' textAlign="center">交換条件</FormLabel>
                             <Input
                                 textAlign="center"
                                 border='0px'
@@ -78,7 +78,7 @@ export const CreateItemConfirm = () => {
                                 textAlign="center"
                                 border='0px'
                                 isReadOnly={true}
-                                defaultValue={location.state.shippingMethod} /> */}
+                                defaultValue={location.state.shippingMethod} />
                             <Center>
                                 <HStack spacing='24px' textAlign="center">
                                     <Button onClick={() => { navigate("/create") }} colorScheme='teal' variant='outline'>戻る</Button>
