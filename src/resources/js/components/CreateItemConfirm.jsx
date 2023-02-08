@@ -17,8 +17,8 @@ export const CreateItemConfirm = () => {
             itemStatus: location.state.itemStatus,
             comment: location.state.comment,
             itemTargetName: location.state.itemTargetName,
-            // itemStatus: location.state.itemStatus,
-            // shippingMethod: location.state.shippingMethod,
+            itemTargetStatus: location.state.itemTargetStatus,
+            shippingMethod: location.state.shippingMethod,
         }
         const headers = { "content-type": "multipart/form-data" };
         axios.post('/api/posts/create', data, { headers })
