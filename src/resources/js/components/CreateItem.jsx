@@ -47,13 +47,12 @@ export const CreateItem = () => {
                                     </FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={errors.itemStatus}>
-                                    <FormLabel htmlFor='itemStatus'>ステータス</FormLabel>
                                     <Controller
                                         render={
                                             ({ field }) => {
                                                 return (
                                                     <>
-                                                        <FormLabel htmlFor='itemStatus'>アイテム名 </FormLabel>
+                                                        <FormLabel htmlFor='itemStatus'> ステータス </FormLabel>
                                                         <RadioGroup {...field}>
                                                             <Stack direction='row'>
                                                                 <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
@@ -69,6 +68,7 @@ export const CreateItem = () => {
                                                 );
                                             }
                                         }
+                                        rules={{ required: 'ステータスを入力してください' }}
                                         name="itemStatus"
                                         control={control}
                                     />
