@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Center, ChakraProvider, Container, FormLabel, HStack, Input, InputGroup, InputRightElement, Spacer, Stack, useDisclosure } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
+import { STATUS } from '../config';
+import { SHIPPING_METHOD } from '../config';
 
 export const CreateItemConfirm = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -54,7 +56,7 @@ export const CreateItemConfirm = () => {
                                 textAlign="center"
                                 border='0px'
                                 isReadOnly={true}
-                                defaultValue={location.state.itemStatus} />
+                                defaultValue={STATUS[location.state.itemStatus]} />
                             <FormLabel htmlFor='' textAlign="center">コメント・補足</FormLabel>
                             <Input
                                 textAlign="center"
@@ -72,13 +74,13 @@ export const CreateItemConfirm = () => {
                                 textAlign="center"
                                 border='0px'
                                 isReadOnly={true}
-                                defaultValue={location.state.itemTargetStatus} />
+                                defaultValue={STATUS[location.state.itemTargetStatus]} />
                             <FormLabel htmlFor='' textAlign="center">郵送方法</FormLabel>
                             <Input
                                 textAlign="center"
                                 border='0px'
                                 isReadOnly={true}
-                                defaultValue={location.state.shippingMethod} />
+                                defaultValue={SHIPPING_METHOD[location.state.shippingMethod]} />
                             <Center>
                                 <HStack spacing='24px' textAlign="center">
                                     <Button onClick={() => { navigate("/create") }} colorScheme='teal' variant='outline'>戻る</Button>

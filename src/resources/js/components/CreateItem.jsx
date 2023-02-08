@@ -169,10 +169,7 @@ export const CreateItem = () => {
                         </Stack>
                     </Container>
                 </Box>
-
             </ChakraProvider >
-
-
         </>
     );
 }
