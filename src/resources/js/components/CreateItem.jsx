@@ -1,9 +1,8 @@
 
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
-import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
 
 export const CreateItem = () => {
@@ -19,7 +18,6 @@ export const CreateItem = () => {
     } = useForm({ mode: 'onChange' })
 
     function onSubmit() {
-        console.log(getValues());
         return navigate('/create/confirm', { state: getValues() });
     }
 
@@ -164,27 +162,6 @@ export const CreateItem = () => {
                                         control={control}
                                     />
                                 </FormControl>
-
-
-
-                                {/* 
-                                <FormControl isInvalid={errors.shippingMethod}>
-                                    <FormLabel>郵送方法</FormLabel>
-                                    <RadioGroup id='shippingMethod' {...register('shippingMethod', {
-                                        required: '郵送方法を入力してください',
-                                    })}>
-                                        <Stack direction='row'>
-                                            <Radio value='0'><Text fontSize='sm'>手渡し</Text></Radio>
-                                            <Radio value='1'><Text fontSize='sm'>郵便（記名）</Text></Radio>
-                                            <Radio value='2'><Text fontSize='sm'>郵便（匿名）</Text></Radio>
-                                            <Radio value='3'><Text fontSize='sm'>宅配（記名）</Text></Radio>
-                                            <Radio value='4'><Text fontSize='sm'>宅配（匿名）</Text></Radio>
-                                        </Stack>
-                                    </RadioGroup>
-                                    <FormErrorMessage>
-                                        {errors.shippingMethod && errors.shippingMethod.message}
-                                    </FormErrorMessage>
-                                </FormControl> */}
                                 <Button colorScheme='teal' isLoading={isSubmitting} type='submit'>
                                     確認
                                 </Button>
