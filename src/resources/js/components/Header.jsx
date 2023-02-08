@@ -49,7 +49,7 @@ export const Header = (props) => {
                             <DrawerBody>
                                 <Button w='100%' bg='transparent'>
                                     <AddIcon pr={2} />
-                                    <Link to="/new">新規作成</Link>
+                                    <Link to="/create">新規作成</Link>
                                 </Button>
                                 <Button w='100%' bg='transparent'>
                                     <QuestionOutlineIcon pr={2} />
