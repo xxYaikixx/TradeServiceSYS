@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, ChakraProvider, Container, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Radio, RadioGroup, Spacer, Stack, TagLabel, Text, Textarea, useDisclosure } from '@chakra-ui/react';
 import { Header } from './Header';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 export const CreateItem = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -14,10 +14,12 @@ export const CreateItem = () => {
         getValues,
         handleSubmit,
         register,
+        control,
         formState: { errors, isSubmitting },
     } = useForm({ mode: 'onChange' })
 
     function onSubmit() {
+        console.log(getValues());
         return navigate('/create/confirm', { state: getValues() });
     }
 
@@ -38,27 +40,39 @@ export const CreateItem = () => {
                                         placeholder='アイテム名'
                                         {...register('itemName', {
                                             required: 'アイテム名を入力してください',
-                                        })} />
+                                        })}
+                                    />
                                     <FormErrorMessage>
                                         {errors.itemName && errors.itemName.message}
                                     </FormErrorMessage>
                                 </FormControl>
-                                {/* <FormControl isInvalid={errors.itemStatus}>
+                                <FormControl isInvalid={errors.itemStatus}>
                                     <FormLabel htmlFor='itemStatus'>ステータス</FormLabel>
-                                    <RadioGroup id='itemStatus' {...register('itemStatus', {
-                                        required: 'ステータスを選択してください',
-                                    })}>
-                                        <Stack direction='row'>
-                                            <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
-                                            <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
-                                            <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
-                                            <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
-                                        </Stack>
-                                    </RadioGroup>
-                                    <FormErrorMessage>
-                                        {errors.itemStatus && errors.itemStatus.message}
-                                    </FormErrorMessage>
-                                </FormControl> */}
+                                    <Controller
+                                        render={
+                                            ({ field }) => {
+                                                return (
+                                                    <>
+                                                        <FormLabel htmlFor='itemStatus'>アイテム名 </FormLabel>
+                                                        <RadioGroup {...field}>
+                                                            <Stack direction='row'>
+                                                                <Radio value='0'><Text fontSize='sm'>カプセル未開封</Text></Radio>
+                                                                <Radio value='1'><Text fontSize='sm'>カプセルのみ開封済み</Text></Radio>
+                                                                <Radio value='2'><Text fontSize='sm'>カプセルおよび内包装開封済み（新品同様）</Text></Radio>
+                                                                <Radio value='3'><Text fontSize='sm'>開封済中古品</Text></Radio>
+                                                            </Stack>
+                                                        </RadioGroup>
+                                                        <FormErrorMessage>
+                                                            {errors.itemStatus && errors.itemStatus.message}
+                                                        </FormErrorMessage>
+                                                    </>
+                                                );
+                                            }
+                                        }
+                                        name="itemStatus"
+                                        control={control}
+                                    />
+                                </FormControl>
                                 <FormLabel>画像</FormLabel>
                                 {/* <Input
                                 id={previewUrl}
