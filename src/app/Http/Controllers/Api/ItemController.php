@@ -45,7 +45,7 @@ class ItemController extends Controller
             $item->status = $request->itemStatus;
             $item->comment = $request->comment;
             // $item->image = $request->file('image')->getClientOriginalName();
-            $item->user_id =  $request->user_id;
+            $item->user_id =  Auth::id();
             $item->change_item_name = $request->itemTargetName;
             $item->change_item_status = $request->itemTargetStatus;
             $item->shipping_method = $request->shippingMethod;

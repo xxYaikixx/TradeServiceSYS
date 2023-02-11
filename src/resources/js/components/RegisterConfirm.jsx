@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Button, Center, ChakraProvider, Container, Flex, FormLabel, HStack, Input, InputGroup, InputRightElement, Spacer, Stack, useDisclosure } from '@chakra-ui/react';
+import { Button, Center, ChakraProvider, Container, FormLabel, HStack, Input, InputGroup, InputRightElement, Spacer, Stack, useDisclosure } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
 
@@ -27,7 +27,7 @@ export const RegisterConfirm = () => {
         const headers = { "content-type": "multipart/form-data" };
         axios.post('/api/posts/register', data, { headers })
             .then(res => {
-                navigate("/login");
+                navigate("/login", { state: { message: '登録完了しました。ログインをしてください。' } })
             }
             )
             .catch(error => {

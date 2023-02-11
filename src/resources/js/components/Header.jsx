@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, IconButton, Img, Menu, MenuButton, MenuItem, MenuList, Spacer, Text } from '@chakra-ui/react'
 import { AddIcon, HamburgerIcon, QuestionOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import swal from 'sweetalert';
 
 export const Header = (props) => {
     const navigate = useNavigate();
-
     const logoutSubmit = (e) => {
         e.preventDefault();
         axios.post(`/api/logout`).then(res => {
@@ -50,7 +49,7 @@ export const Header = (props) => {
                             <DrawerBody>
                                 <Button w='100%' bg='transparent'>
                                     <AddIcon pr={2} />
-                                    <Link to="/new">新規作成</Link>
+                                    <Link to="/create">新規作成</Link>
                                 </Button>
                                 <Button w='100%' bg='transparent'>
                                     <QuestionOutlineIcon pr={2} />
@@ -74,7 +73,7 @@ export const Header = (props) => {
                         <Menu>
                             <Text>こんにちは。{localStorage.auth_nickname}さん</Text>
                             <MenuButton as={Button} bg='transparent' _hover='transparent' _active='transparent'>
-                                <Avatar bg='teal.500' />
+                                <Img borderRadius='full' boxSize='40px' src={localStorage.getItem('auth_thumbnail')} alt="" />
                             </MenuButton>
                             <MenuList>
                                 <MenuItem onClick={logoutSubmit}>ログアウト</MenuItem>
